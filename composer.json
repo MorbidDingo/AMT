@@ -1,0 +1,5 @@
+{
+    "require": {
+        "finhub/client": "1.1.15"
+    }
+}
