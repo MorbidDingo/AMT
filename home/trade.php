@@ -84,7 +84,7 @@
                                                     while($row = $result->fetch_assoc())
                                                     {
                                                         ?>
-                                                            <li class="stocklist"><?php echo $row["Ticker"] ?>
+                                                            <div class="stocklist" id="a"><?php echo $row["Ticker"] ?></div>
                                                         <?php
                                                     }
                                                 } else {
@@ -94,6 +94,107 @@
                                                 
                                             ?>
                                             </div>
+                                            <style>
+                                                .stocklist{
+                                                    border: 0px solid white; 
+                                                    cursor: pointer;
+                                                    padding-left: -10px;
+                                                }
+                                                /* #a:hover ~ #stockPrice
+                                                {
+                                                    /* not(.stocklist); */
+                                                    /* margin-left: 3vw; */
+                                                    /* transition-duration: 200ms; */
+                                                    /* border-bottom: 1px solid white; */
+                                                    /* border-top: 1px solid white; */
+                                                    /* backdrop-filter: blur(10px); */
+                                                    /* background-color: black; */
+                                                    /* -webkit-filter: blur(2px); */
+                                                    /* -moz-filter: blur(2px);
+                                                    -o-filter: blur(2px);
+                                                    -ms-filter: blur(2px); */
+                                                    /* filter: blur(2px);   */
+                                                /* } */
+
+                                                /* #stockPrice:hover
+                                                {
+                                                    transition-duration: 200ms;
+                                                    border-bottom: 1px solid white;
+                                                    border-top: 1px solid white;
+                                                    backdrop-filter: blur(10px);
+                                                    background-color: black;
+                                                    margin-left: -40vw;
+                                                } */
+                                                /* Button used to open the contact form - fixed at the bottom of the page */
+                                                .open-button {
+                                                background-color: #555;
+                                                color: white;
+                                                padding: 16px 20px;
+                                                border: none;
+                                                cursor: pointer;
+                                                opacity: 0.8;
+                                                position: fixed;
+                                                bottom: 23px;
+                                                right: 28px;
+                                                width: 280px;
+                                                }
+
+                                                /* The popup form - hidden by default */
+                                                .form-popup {
+                                                display: none;
+                                                position: fixed;
+                                                bottom: 0;
+                                                right: 15px;
+                                                border: 3px solid #f1f1f1;
+                                                z-index: 9;
+                                                /* margin-left: 20vh; */
+                                                }
+
+                                                /* Add styles to the form container */
+                                                .form-container {
+                                                max-width: 300px;
+                                                padding: 10px;
+                                                background-color: white;
+                                                margin-left: 20vw;
+                                                }
+
+                                                /* Full-width input fields */
+                                                .form-container input[type=text], .form-container input[type=password] {
+                                                width: 100%;
+                                                padding: 15px;
+                                                margin: 5px 0 22px 0;
+                                                border: none;
+                                                background: #f1f1f1;
+                                                }
+
+                                                /* When the inputs get focus, do something */
+                                                .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+                                                background-color: #ddd;
+                                                outline: none;
+                                                }
+
+                                                /* Set a style for the submit/login button */
+                                                .form-container .btn {
+                                                background-color: #04AA6D;
+                                                color: white;
+                                                padding: 16px 20px;
+                                                border: none;
+                                                cursor: pointer;
+                                                width: 100%;
+                                                margin-bottom:10px;
+                                                opacity: 0.8;
+                                                }
+
+                                                /* Add a red background color to the cancel button */
+                                                .form-container .cancel {
+                                                background-color: red;
+                                                }
+
+                                                /* Add some hover effects to buttons */
+                                                .form-container .btn:hover, .open-button:hover {
+                                                opacity: 1;
+                                                }
+                                            </style>
                                             <div class="col-md-5 border">
                                                 <?php
                                                 // SQL QUERY
@@ -103,12 +204,47 @@
                                                     while($r = $re->fetch_assoc())
                                                     {
                                                         ?>
-                                                            <li class="stocklist"><?php echo $r["close"] ?></li>
+                                                            <div class="stocklist" id="stockPrice" onclick="openForm()"><?php echo $r["close"] ?></div>
                                                         <?php
                                                     }
                                                 ?>
                                             </div>
+                                            <script>
+                                                function openForm() {
+                                                document.getElementById("myForm").style.display = "block";
+                                                }
+
+                                                function closeForm() {
+                                                document.getElementById("myForm").style.display = "none";
+                                                }
+
+                                                // $(function() {
+                                                // $('#a').hover(function() {
+                                                //     $('#stockPrice').css('background-color', 'yellow');
+                                                // }, function() {
+                                                //     // on mouseout, reset the background colour
+                                                //     $('#stockPrice').css('background-color', '');
+                                                // });
+                                                // });
+      
+                                            </script>
+
                                         </div>
+
+                                    </div>
+                                    <div class="form-popup" id="myForm">
+                                    <form action="/action_page.php" class="form-container">
+                                        <h1>Login</h1>
+
+                                        <label for="email"><b>Email</b></label>
+                                        <input type="text" placeholder="Enter Email" name="email" required>
+
+                                        <label for="psw"><b>Password</b></label>
+                                        <input type="password" placeholder="Enter Password" name="psw" required>
+
+                                        <button type="submit" class="btn">Login</button>
+                                        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                                    </form>
                                     </div>
                                     <div class="col-md-12 border border-bottom-0" style="height:41vh" id="watch">
                                         <?php

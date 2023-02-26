@@ -1,4 +1,4 @@
-a=2
-b=3
-c=a+b
-print(c)
+import yfinance as yf
+
+tick =yf.Ticker('AAPL')
+print(tick)

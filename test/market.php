@@ -43,11 +43,8 @@
           
     </div>
     </div>
-    <div class="col-md-11" style="height: 90.1vh">
-    
-    <div id="main">
-  <!-- <button class="openbtn" onclick="openNav()">&#9776; Open Sidebar</button> -->
-  <button type="button" onclick="openNav()" class="btn btn-outline-dark">&#9776;</button><br><br>
+    <div class="col-md-12" style="height: 90.1vh">
+  
     <div id="app">
   <div class="app-container">
   
@@ -80,7 +77,6 @@
 ?>
     </div>
   </div>
-</div>
 </div>
 
 </body>

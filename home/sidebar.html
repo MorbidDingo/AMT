@@ -11,6 +11,19 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
+    
+    <style>
+      #txtHints
+      {
+        color: white;background-color: black;border-radius: 10px;border: 1px solid white; overflow-y: auto; margin-left: 0.7vw; margin-top: 0.5vh; min-height: 0vh; max-height: 25vh; padding-left: 20%; cursor: pointer;
+      }
+
+      #txtHints:hover
+      {
+        transform: scale(1.1);
+        transition-duration: 200ms;
+      }
+    </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
@@ -21,12 +34,14 @@
         <p class="logo">Workspace</p>
         <i class="bx bx-menu btn-menu"></i>
       </div>
-      <ul class="nav-links">
+      <ul class="nav-links" style="margin-top: 3vh;">
         <li>
-          <i class="bx bx-search search-btn"></i>
-          <input type="text" placeholder="Search..." style="margin-left: 0.5vw;" onkeyup="showHint(this.value)"/>
-          <span class="tooltip">Search</span>
-          <div class="hints" id="txtHint"></div>
+          <i class="bx bx-search search-btn" style="position: absolute; margin-left: 0.4vw;" id="search-click"></i>
+          <input type="text" placeholder="Search for stocks, indices, etc." style="margin-left: 0.5vw;" onkeyup="showHint(this.value)"/>
+          <span class="tooltip" style="margin-top: 1vh;">Search</span>
+          <div class="hints" id="txtHints">
+            <div class="hint" id="txtHint" style="min-height: 0px; max-height: 100%; "></div>
+          </div>
         </li>
         <li>
           <a href="#" id="panel">
@@ -89,9 +104,7 @@
       btn_menu.addEventListener("click", function () {
         side_bar.classList.toggle("expand");
         changebtn();
-        document.getElementById('#content').style.width = "70vw";
-        document.getElementById('.card').style.width = "70vw";
-
+        
       });
 
       function changebtn() {
@@ -143,9 +156,15 @@ $(document).ready(function(){
   });
 });
 
+$(document).ready(function(){
+  $("#search-click").click(function(){
+    changebtn();
+  });
+});
+
 function showHint(str) {
   if (str.length == 0) {
-    document.getElementById("txtHint").innerHTML = "";
+    document.getElementById("txtHints").innerHTML = "";
     return;
   } else {
     var xmlhttp = new XMLHttpRequest();

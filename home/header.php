@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark border-bottom" id="nav">
+<nav class="navbar navbar-expand-sm navbar-dark" id="nav">
         <div class="container-fluid">
             <a href="../home/index.php" class="navbar-brand">AMT</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#AMTHome">
@@ -6,7 +6,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="AMTHome">
-                <ul class="navbar-nav me-auto" id="nav-links">
+                <ul class="navbar-nav me-auto" id="nav-links" style="text-align: center;">
                     <li class="nav-item">
                         <a href="../market/market.php" class="nav-link" active>Markets</a>
                     </li>

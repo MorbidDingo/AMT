@@ -20,6 +20,19 @@
   --color-bg: #1d1b31;
 }
 
+.hints
+{
+  color: white;
+  background-color: black;
+  border-radius: 10px;
+  border: 1px solid white; 
+  overflow-y: auto; 
+  margin-left: 1vw; 
+  margin-top: 0.5vh; 
+  min-height: 0vh; 
+  max-height: 1vh;
+}
+
 .sidebar {
   position: fixed;
   margin-top: 0vh;
@@ -253,6 +266,8 @@
   left: 3px;
   transition: var(--transition);
 }
+
+
 
 .theme-wrapper .theme-btn .theme-ball.dark {
   left: 20px;
