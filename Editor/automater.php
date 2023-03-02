@@ -154,6 +154,7 @@
                                 <option value="NONFARM_PAYROLL">Nonfarm Payroll</option>
                             </select>
 
+                            <input type="submit" class="form-control" id="save" value="Save"/>
 
                         </div>
                     </form>
@@ -161,9 +162,21 @@
             </div>
         </div>
     </div>
+    <script>
+            $(document).ready(function(){
+  
+            $("#save").click(function() {
+                var stockname=$("#stockname").val();
+                $.ajax({
+                url:'../data/analysis_results.php',
+                data:{stockname: stockname},
+                type:'POST',
+                success:function(data) {
+                    $("#result").html(data);
+                }
+                });
+            });
+        });
+        </script>
 </body>
 </html>
-
-<?php
-
-?>

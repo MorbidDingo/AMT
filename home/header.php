@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-dark" id="nav">
         <div class="container-fluid">
-            <a href="../home/index.php" class="navbar-brand">AMT</a>
+            <a href="../home/index.php" class="navbar-brand animate__animated animate__slideInDown">AMT</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#AMTHome">
                 <span class="navbar-toggler-icon"></span>
             </button>

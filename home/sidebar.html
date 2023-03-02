@@ -32,7 +32,7 @@
     <section class="sidebar">
       <div class="nav-header">
         <p class="logo">Workspace</p>
-        <i class="bx bx-menu btn-menu"></i>
+        <i class="bx bx-menu btn-menu animate__animated animate__shakeX  animate__delay-5s animate__repeat-2"></i>
       </div>
       <ul class="nav-links" style="margin-top: 3vh;">
         <li>
@@ -58,7 +58,7 @@
           <span class="tooltip">Trade</span>
         </li>
         <li>
-          <a href="#">
+          <a href="#" id="analysis">
             <i class='bx bx-chart'></i>
             <span class="title">Analysis</span>
           </a>
@@ -161,6 +161,13 @@ $(document).ready(function(){
     changebtn();
   });
 });
+
+$(document).ready(function(){
+  $("#analysis").click(function(){
+    $("#home").load("analysis.php");
+  });
+});
+
 
 function showHint(str) {
   if (str.length == 0) {
