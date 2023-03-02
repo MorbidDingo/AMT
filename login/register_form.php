@@ -1,7 +1,6 @@
 <?php
 @include 'config.php';
 session_start();
-
 if(isset($_POST['submit'])){
     $id = mysqli_real_escape_string($conn, $_POST['id']);
     $name=mysqli_real_escape_string($conn,$_POST['name']);
@@ -9,6 +8,7 @@ if(isset($_POST['submit'])){
     $pass=md5($_POST['password']);
     $cpass=md5($_POST['cpassword']);
     $user_type=$_POST['user_type'];
+    $bank=md5($_POST['bank']);
 
     $_SESSION['user'] = $id;
 
@@ -21,7 +21,7 @@ if(isset($_POST['submit'])){
     {
       mkdir('users/'.$_SESSION['user']);
       mkdir('users/'.$_SESSION['user'].'/Strategies');
-      // mkdir('users/'.$_SESSION['user'].'/Trade');
+      // mkdir('users/'.$_SESSION['user'].'/Dummy');
     }
 
     if(mysqli_num_rows($result)>0){
@@ -34,7 +34,7 @@ if(isset($_POST['submit'])){
         if($pass!=$cpass){
             $error[]='password not matched!!';
         }else{
-            $insert="INSERT INTO user_form(id,name,email,password,user_type) VALUES('$id','$name','$email','$pass','$user_type')";
+            $insert="INSERT INTO user_form(id,name,email,password,user_type,bank) VALUES('$id','$name','$email','$pass','$user_type','$bank')";
             mysqli_query($conn,$insert);
             header('location:login_form.php');
         }
@@ -72,9 +72,16 @@ if(isset($_POST['submit'])){
       <input type="password" name="password" required  autocomplete="off" placeholder="Enter Your Password"><br>
       <input type="password" name="cpassword" required  autocomplete="off" placeholder="Confirm Your Password"><br>
       <select name="user_type">
-        <option value="user">user</option>
-        <option value="admin">admin</option>
+        <option value="bank">Select your Bank</option>
+        <option value="icici">ICICI</option>
+        <option value="hdfc">HDFC</option>
+        <option value="pnb">PNB</option>
+        <option value="bob">BOB</option>
+        <option value="bom">BOM</option>
+        <option value="sbi">SBI</option>
+        <option value="kotak">KOTAK</option>
       </select><br>
+      <input type="number" name="bank" required  autocomplete="off" placeholder="Enter Your Account number"><br>
       <input type="submit" name="submit" value="Register Now" class="form-btn">
       <p>Already have an account? <a href="login_form.php">Login Now</a></p>
 
