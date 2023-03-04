@@ -3,7 +3,7 @@
     session_start();
 ?>
 <div class="col-md-10" id='content' style="border-radius: 0px;">
-            <div class="card border-0" style="margin-top:0vh; height: 93vh; color: white; background-color: rgb(20, 40, 60); border-radius: 0px; width: 95.1vw;">
+            <div class="card border-0" style="margin-top:0vh; height: 93vh; color: white; background-color: rgb(20, 40, 60); border-radius: 0px; width: 120%;">
                 <div class="card-body">
                         <h2 class="card-title border-bottom border-dark" style="text-align: left;" id="panel">My Panel</h2>
                         <h2 class="card-title border-bottom border-dark" style="text-align: right;" id="main"><?php echo $_SESSION['user_id']; ?></h2>
@@ -18,7 +18,7 @@
                         </div>
 
                         <div class="col-md-2" id="heading-2" style="border-left: 0px solid black;">
-                            <button class="btn btn-primary" id="create-button" style="margin-top: 13%;">Create +</button>
+                           <a href="../Editor/automater.php"><button class="btn btn-primary" id="create-button" style="margin-top: 13%;">Create +</button></a>
                         </div>
 
                         
@@ -45,7 +45,8 @@
                                     <h3><?php echo $row['name']; ?></h3>
                                 </div>
                                 <div class="col-2">
-                                    <input type="submit" class="form-control" value="Modify" style="margin-top: 1vh;">
+                                    <input type="submit" class="form-control" value="Modify" id="modify" style="display: inline-block; margin: 0 0.5rem; animation: shakeX infinite 2s; animation-delay: 2s; margin-top: 1vh; margin-left: -20px;                                
+                                    ">
                                 </div>
                                 <div class="col-2">
                                     <style>
@@ -275,34 +276,15 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-8" style="margin-top: -0.8vh;">
-                                        <div class="text-body border" style=" border-radius: 10px; height: 7vh; margin-top: 1vh;">
-                                            <p class="text-bg-light" id="strat-desc" style="height: 7vh; border-radius: 10px; overflow-y: auto;"><?php echo $row['descr']; ?></p>
-                                        </div>
+                                        <!-- <div class="text-body border" style=" border-radius: 10px; height: 7vh; margin-top: 1vh;"> -->
+                                            <p class="text-bg-light" id="strat-desc" style="height: 80%; width: 95%; border-radius: 10px; overflow-y: auto; overflow-x: auto; font-size: 12px; margin-top: 1.5%;"><?php echo $row['descr']; ?></p>
+                                        <!-- </div> -->
                                         </div>
                                         <div class="col-md-4 border-start">
                                             Tags
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="col-md-2" id="list-div">
-                                <div class="container-fluid">
-                                    <div class="row" style="margin-top: 1.5vh;">
-                                        <div class="col-md-5 border-end border-bottom">
-                                            <p style="font: x-small;">Public:</p>
-                                        </div>
-
-                                        <div class="col-md-7 border-bottom">
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        
-                                        <input type="button" value="Publish" class="form-control-sm" style="margin-left: 3.3vw; margin-top: 12%;">                                        
-                                    </div>
-                                </div>
-                                
                             </div>
 
                             <!-- <div class="col-md-8" id="list-div">Strategy 1</div>

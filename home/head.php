@@ -9,6 +9,10 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../home/style.css">
     <link rel="stylesheet" href="style.scss">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <title>Document</title>
     <meta http-equiv="refresh" #list-div="10">
     

@@ -298,3 +298,8 @@
   margin: 20px;
   white-space: nowrap;
 }
+
+.animate__animated.animate__bounce {
+  --animate-duration: 2s;
+  animation: my-fancy-animation 3s 2; 
+}
