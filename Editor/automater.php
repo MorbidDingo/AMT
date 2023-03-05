@@ -61,11 +61,11 @@
         <div class="row">
             <div class="col-12" style="height: 5vh; margin-top:-3vh;"></div>
                 <div class="form-container">
-                    <form action="scriptRunner.php" method="post">
+                    <form action="../Editor/strategyRunnner.php" method="post">
                         <div class="card">
                             <div class="card-title"><h3>Strategy Details</h3></div>
-                            Strategy Name: <input class="form-control" type="text" placeholder="Golden Crossover"/>
-                            Strategy Description: <textarea placeholder="This will tell what the strategy does."></textarea>
+                            Strategy Name: <input class="form-control" type="text" placeholder="Golden Crossover" name="name"/>
+                            Strategy Description: <textarea placeholder="This will tell what the strategy does." name="descr"></textarea>
                             <div class="form-label">Shall the strategy run in the background?</div>
                             <div class="form-check form-switch" style="margin-left: 1vw;">
                                 <input class="form-check-input mt-0" type="checkbox" role="switch" id="flexSwitchCheckDefault" value="YES" style="cursor:pointer;">
@@ -74,19 +74,19 @@
                             <div class="form-label">Privacy of your Strategy:</div>
                             <div class="form-check form-switch" style="margin-left: 1vw;">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Public</label>
-                                <input class="form-check-input mt-0" type="checkbox" role="switch" id="flexSwitchCheckDefault" value="1" style="cursor:pointer;">
+                                <input class="form-check-input mt-0" type="checkbox" role="switch" id="flexSwitchCheckDefault" value="1" style="cursor:pointer;" name="privacy">
                             </div>
                         </div>
                         <div class="col-12" style="height: 5vh;display: block; float: left;"></div>
                         <div class="card">
                             <div class="card-title"><h3>Ticker Details</h3></div>
-                            <select class="form-select" aria-label="Default select example">
+                            <select class="form-select" aria-label="Default select example" name="exchange">
                                 <option selected value="nasdaq">NASDAQ</option>
                                 <option value="nyse">NYSE</option>
                                 <option value="ame">American</option>
                                 <option value="all">All</option>
                             </select>
-                            Enter Scrip or Ticker <input class="form-control" type="text" placeholder="AAPL or Apple Inc."/>
+                            Enter Scrip or Ticker <input class="form-control" type="text" placeholder="AAPL or Apple Inc." name="ticker"/>
                         </div>
 
                         <div class="col-12" style="height: 5vh;display: block; float: left;"></div>
@@ -115,20 +115,24 @@
                                 <option value="VWAP">Volume Weighted Average Price (VWAP)</option>
                             </select>
 
-                            <label for="customRange3" class="form-label">Time Interval</label>
-                            <input list="intervalSettings" type="range" class="form-range" min="1" max="8" step="1" value="1" id="customRange3" oninput="rangeValue.innerText = this.value">
-                            <datalist id="intervalSettings">
-                                <option value="1m">1m</option>
-                                <option value="1m">5m</option>
-                                <option value="1m">15m</option>
-                                <option value="1m">1H</option>
-                                <option value="1m">4H</option>
-                                <option value="1m">1D</option>
-                                <option value="1m">1W</option>
-                                <option value="1m">1M</option>
-                            </datalist>
+                        <div class="col-12" style="height: 5vh;display: block; float: left;"></div>
+                        <div class="card">
+                            <div class="card-title"><h3>Time Period</h3></div>
+                            Strategy Name: <input class="form-control" type="text" placeholder="50" name="time" number min="0" max="200"/>
+                        </div>
 
-                            <script>
+                            <label for="customRange3" class="form-label">Time Interval</label>
+                            <select id="intervalSettings" name="interval">
+                                <option value="1min">1min</option>
+                                <option value="5min">5min</option>
+                                <option value="15min">15min</option>
+                                <option value="60min">60min</option>
+                                <option value="daily">daily</option>
+                                <option value="weekly">weekly</option>
+                                <option value="monthly">monthly</option>
+                            </select>
+
+                            <!-- <script>
                                 var time = document.getElementById("customRange3");
                                 var output = document.getElementById("rangeValue");
                         
@@ -138,7 +142,7 @@
                                         "Value = " + "'" + output.value + "'";
                                 }
                             </script>
-                            <p id="rangeValue">1</p>
+                            <p id="rangeValue">1</p> -->
 
                             <select class="form-select" aria-label="Default select example" name="economic" style="margin-top: 2vh;">
                             <option selected disabled>Economic Indicators</option>
@@ -153,8 +157,9 @@
                                 <option value="UNENMPLOYMENT">Unemployment Rate</option>
                                 <option value="NONFARM_PAYROLL">Nonfarm Payroll</option>
                             </select>
-
-                            <input type="submit" class="form-control" id="save" value="Save"/>
+                            
+                            <div class="col-12" style="height: 5vh;display: block; float: left;"></div>
+                            <input type="submit" class="form-control" id="save" value="Save" name="save"/>
 
                         </div>
                     </form>
@@ -162,21 +167,6 @@
             </div>
         </div>
     </div>
-    <script>
-            $(document).ready(function(){
   
-            $("#save").click(function() {
-                var stockname=$("#stockname").val();
-                $.ajax({
-                url:'../data/analysis_results.php',
-                data:{stockname: stockname},
-                type:'POST',
-                success:function(data) {
-                    $("#result").html(data);
-                }
-                });
-            });
-        });
-        </script>
 </body>
 </html>
