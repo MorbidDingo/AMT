@@ -65,7 +65,7 @@
           <span class="tooltip">Analysis</span>
         </li>
         <li>
-          <a href="#">
+          <a href="#" id ="interact">
             <i class='bx bx-universal-access' ></i>
             <span class="title">Interact</span>
           </a>
@@ -165,6 +165,12 @@ $(document).ready(function(){
 $(document).ready(function(){
   $("#analysis").click(function(){
     $("#home").load("analysis.php");
+  });
+});
+
+$(document).ready(function(){
+  $("#interact").click(function(){
+    $("#home").load("../community/community.php");
   });
 });
 
