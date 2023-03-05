@@ -1,5 +1,33 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add Funds</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../funds/smriti.css">
+    <link rel="stylesheet" type="text/css" href="css/navbar5.css">
+    <link rel="stylesheet" type="text/css" href="css/footer5.css">
+
+    <style type="text/css">
+    	
+		button{
+			border:none;
+			background: #d9d9d9;
+		}
+	    button:hover{
+			background-color:#777E8B;
+			transform: scale(1.1);
+			color:white;
+		}
+
+    </style>
+
+    </head>
+
 <?php
-include 'config.php';
+include '../login/config.php';
 
 if(isset($_POST['submit']))
 {
@@ -78,43 +106,18 @@ if(isset($_POST['submit']))
     
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transaction</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="smriti.css">
-    <link rel="stylesheet" type="text/css" href="css/navbar5.css">
-    <link rel="stylesheet" type="text/css" href="css/footer5.css">
-
-    <style type="text/css">
-    	
-		button{
-			border:none;
-			background: #d9d9d9;
-		}
-	    button:hover{
-			background-color:#777E8B;
-			transform: scale(1.1);
-			color:white;
-		}
-
-    </style>
-</head>
-
 <body style="background-color : #ececec;">
  
 <?php
-//   include 'navbar.php';
+    // include('../home/header.php');
 ?>
 
 	<div class="container">
+        <a href="../home/index.php#" class="btn btn-primary">Home</a>
+        <a href="../funds/displaytable.php" class="btn btn-primary">Cancel</a>
         <h2 class="text-center pt-4" style="color : #004AAD;">Transaction</h2>
             <?php
-                include 'config.php';
+                include '../login/config.php';
                 $sid=$_GET['id'];
                 $sql = "SELECT * FROM user_form where id=$sid";
                 $result=mysqli_query($conn,$sql);
@@ -130,13 +133,13 @@ if(isset($_POST['submit']))
                 <tr style="color : white;">
                     <th class="text-center">Id</th>
                     <th class="text-center">Name</th>
-                    <th class="text-center">Email</th>
+                    <!-- <th class="text-center">Email</th> -->
                     <th class="text-center">Total Balance</th>
                 </tr>
                 <tr style="color : white;">
                     <td class="py-2"><?php echo $rows['id'] ?></td>
                     <td class="py-2"><?php echo $rows['name'] ?></td>
-                    <td class="py-2"><?php echo $rows['email'] ?></td>
+                    <!-- <td class="py-2">></td> -->
                     <td class="py-2">Rs. <?php echo $rows['balance'] ?></td>
                 </tr>
             </table>

@@ -1,14 +1,21 @@
 <?php
-if(isset($_POST['buy']))
+if(isset($_GET['buy']))
 {
-    $tick = $_POST['ticker'];
-    $q = $_POST['quantity'];
+    $tick = $_GET['ticker'];
+    $q = $_GET['quantity'];
     echo $tick;
     echo $q;
 }
-else if(isset($_POST['sell']))
+else if (isset($_GET['sell']))
 {
-    echo $_POST['ticker'];
-    echo $_POST['quantity'];
+    $tick = $_GET['ticker'];
+    $q = $_GET['quantity'];
+    echo $tick;
+    echo $q;
 }
+// else if(isset($_POST['sell']))
+// {
+//     echo $_POST['ticker'];
+//     echo $_POST['quantity'];
+// }
 ?>

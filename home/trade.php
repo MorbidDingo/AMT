@@ -184,11 +184,13 @@
                             if ($result1->num_rows > 0) {
                                 while($row1 = $result1->fetch_assoc()) 
                                 {
-                        ?>
+                                  ?>
+                                  
                             <div class="card animate__animated">
                                 <div class="card-title">
                                 <img src='https://companiesmarketcap.com/img/company-logos/64/<?php echo $row1["ticker"];?>.webp'/>
                                     <?php
+                                    $_SESSION['ticker'] = $row1["ticker"];
                                     echo $row1["name"]."\t\t";
                                     ?>
                                 </div>
@@ -246,25 +248,31 @@
         </div>
     </div>
 
-    <div class="loginPopup">
-      <div class="formPopup animate__animated animate__zoomInDown" id="popupForm">
-        <form action="tradeBack.php" method= "POST" class="formContainer">
-          <h2>Trade Details</h2>
-          <div class="heading-6" id="showTicker"></div>
-          <!-- <label for="email">
-            <strong>E-mail</strong>
-          </label> -->
-          <input type="text" id="email" placeholder="Quantity" name="quantity" required>
-          <!-- <label for="psw">
-            <strong>Password</strong>
-          </label> -->
-          <input type="number" id="price" placeholder="Price" name="price" required>
-          <input type="hidden" name="ticker" value="<?php echo $row1['ticker'];?>"/>
-          <input type="submit" class="btn">Buy</input>
-          <input type="button" class="btn cancel" onclick="closeForm()">Sell</input>
-        </form>
-      </div>
-    </div>
+
+                                <?php
+                                  $ticker = $_SESSION['ticker'];
+                                ?>
+                                <div class="loginPopup">
+                                  <div class="formPopup animate__animated animate__zoomInDown" id="popupForm">
+                                    <form action="tradeBack.php" method= "GET" class="formContainer">
+                                      <h2>Trade Details</h2>
+                                      <div class="heading-6" id="showTicker"></div>
+                                      <!-- <label for="email">
+                                        <strong>E-mail</strong>
+                                      </label> -->
+                                      <input type="text" id="email" placeholder="Quantity" name="quantity" required>
+                                      <!-- <label for="psw">
+                                        <strong>Password</strong>
+                                      </label> -->
+                                      <input type="text" id="price" placeholder="Price" name="price" required min="0" max="1000000000.00">
+                                      <input type="hidden" name="ticker" value="<?php echo $ticker;?>"/>
+                                      <input type="submit" class="btn" value="Buy" name="buy"></input>
+                                      <input type="submit" class="btn cancel" onclick="closeForm()" value="Sell" name="sell"></input>
+                                    </form>
+                                  </div>
+                                </div>
+
+   
     <script>
   $(document).ready(function() {
     setInterval(function() {

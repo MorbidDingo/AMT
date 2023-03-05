@@ -57,6 +57,7 @@
 </head>
 <body style="background-color: black;">
     <div class="container-fluid">
+        <a href="../Editor/enterAutomation.php" class="btn btn-primary">< Back</a>
         <h1 style="text-align: center; color: white;">Automater</h1>
         <div class="row">
             <div class="col-12" style="height: 5vh; margin-top:-3vh;"></div>

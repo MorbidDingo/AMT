@@ -12,7 +12,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="../Editor/index.php" class="nav-link">Automation</a>
+                        <a href="../Editor/enterAutomation.php" class="nav-link">Automation</a>
                     </li>
 
                     <li class="nav-item">
@@ -20,11 +20,10 @@
                     </li>
                 </ul>
 
-                <form class="d-flex" action="apiCalls.php" method="POST">
-                    <input class="form-control mr-sm-2" type="text" name="stock" style="margin-right: 1vw;" placeholder="Search" aria-label="Search">
-                    <input class="btn btn-primary" id="search" type="submit" value="Search" name="search"/>
+                <a class="btn btn-primary" href="../funds/displaytable.php" role="button">Funds +</a>
+                <form action="../login/destroy.php" method="post">
+                    <input type="submit" class="btn btn-primary" name="destroy" value="Logout" style="margin-left: 2rem;">
                 </form>
-
             </div>
         </div>
     </nav>

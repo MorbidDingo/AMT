@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transfer Money</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="smriti.css">
-    <link rel="stylesheet" type="text/css" href="css/navbar5.css">
-    <link rel="stylesheet" type="text/css" href="css/footer5.css">
+    <title>Funds</title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../funds/smriti.css">
+    <link rel="stylesheet" type="text/css" href="css/navbar5.css">
+    <link rel="stylesheet" type="text/css" href="css/footer5.css">    
     <style type="text/css">
       button{
         transition: 1.5s;
@@ -20,10 +21,15 @@
     </style>
 </head>
 
+
+
 <body style="background-color : #ececec;">
 <?php
-    include 'config.php';
-    $sql = "SELECT * FROM user_form";
+    
+    include('../home/head.php');
+    include('../home/header.php');
+    $name = $_SESSION['user_name'];
+    $sql = "SELECT * FROM user_form where name = '$name'";
     $result = mysqli_query($conn,$sql);
 ?>
 
@@ -42,7 +48,6 @@
                             <tr>
                             <th scope="col" class="text-center py-2">Sr No.</th>
                             <th scope="col" class="text-center py-2">Name</th>
-                            <th scope="col" class="text-center py-2">E-Mail</th>
                             <th scope="col" class="text-center py-2">Balance</th>
                             <th scope="col" class="text-center py-2">Action</th>
                             </tr>
@@ -55,7 +60,6 @@
                     <tr style="color : white;">
                         <td class="py-2"><?php echo $rows['id']?></td>
                         <td class="py-2"><?php echo $rows['name']?></td>
-                        <td class="py-2"><?php echo $rows['email']?></td>
                         <td class="py-2">Rs. <?php echo $rows['balance']?> /-</td>
                         <td><a href="add_money.php?id= <?php echo $rows['id'] ;?>"> <button type="button" class="btn" style="background-color : #e6b31a;" style="border-radius:0%;">ADD MONEY</button></a></td> 
                     </tr>

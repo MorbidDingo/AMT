@@ -326,4 +326,10 @@
         <?php
                                         }
                                     }
+        else
+        {
+
+            echo "No strategies!";
+
+        }
         ?>
