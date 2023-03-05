@@ -4,11 +4,11 @@
 
     $id = $_SESSION['user_id'];
 
-    $apis = Array();
-    $i = 0;
+    // $apis = Array();
+    // $i = 0;
 
-    $apis = ['KDO3T9VUTSBFZ95I','Z9B7UL3A9RJJRWTH','H2L0FSX173Z8UGLH', '8OPGJ66I9KZJ0138','5Y6IMVRFWYOYC33K'];
-    $count = 0;
+    // $apis = ['KDO3T9VUTSBFZ95I','Z9B7UL3A9RJJRWTH','H2L0FSX173Z8UGLH', '8OPGJ66I9KZJ0138','5Y6IMVRFWYOYC33K'];
+    // $count = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,6 +95,75 @@
     {
         border-bottom: 1px solid black;
     }
+
+    * {
+        box-sizing: border-box;
+      }
+      .openBtn {
+        display: flex;
+        justify-content: left;
+      }
+      .openButton {
+        border: none;
+        border-radius: 5px;
+        background-color: #1c87c9;
+        color: white;
+        padding: 14px 20px;
+        cursor: pointer;
+        position: fixed;
+      }
+      .loginPopup {
+        position: relative;
+        text-align: center;
+        width: 50vw;
+        height: 50vh;
+        margin-left: 5vw;
+      }
+      .formPopup {
+        display: none;
+        position: fixed;
+        left: 45%;
+        top: 5%;
+        transform: translate(-50%, 5%);
+        border: 3px solid #999999;
+        z-index: 9;
+      }
+      .formContainer {
+        max-width: 40vw;
+        padding: 20px;
+        background-color: #fff;
+      }
+      .formContainer input[type=text],
+      .formContainer input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 20px 0;
+        border: none;
+        background: #eee;
+      }
+      .formContainer input[type=text]:focus,
+      .formContainer input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+      }
+      .formContainer .btn {
+        padding: 12px 20px;
+        border: none;
+        background-color: #8ebf42;
+        color: #fff;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 15px;
+        opacity: 0.8;
+      }
+      .formContainer .cancel {
+        background-color: #cc0000;
+      }
+      .formContainer .btn:hover,
+      .openButton:hover {
+        opacity: 1;
+      }
+
 </style>
 
 <body>
@@ -150,14 +219,14 @@
                                     ?>
                                 </div>
                                 <div class="card-footer" style="margin-top: -2rem;">
-                                    <input type="submit" class="btn btn-success align-self-end" value="Buy" name="buy" id="buy"/>
-                                    <input type="submit" class="btn btn-danger align-self-end" value="Sell" name="sell" id="sell" style="margin-left: 0.5rem;"/>
+                                    <button class="btn btn-primary" value="Trade" name="trade" id="<?php echo $row1['ticker'];?>"  onclick="openForm();reply_click(this.id)">Trade</button>
                                     <input type="button" value="Watchlist +" class="btn btn-primary text-right" style="margin-left: 25rem;">
                                 </div>
                                 </div>
                                 <?php                                         
                                     }
-                                 } else {
+                                } 
+                                else {
                                     echo "0 results";
                                     }
                                     $conn->close();
@@ -176,12 +245,46 @@
             </div>
         </div>
     </div>
+
+    <div class="loginPopup">
+      <div class="formPopup animate__animated animate__zoomInDown" id="popupForm">
+        <form action="tradeBack.php" method= "POST" class="formContainer">
+          <h2>Trade Details</h2>
+          <div class="heading-6" id="showTicker"></div>
+          <!-- <label for="email">
+            <strong>E-mail</strong>
+          </label> -->
+          <input type="text" id="email" placeholder="Quantity" name="quantity" required>
+          <!-- <label for="psw">
+            <strong>Password</strong>
+          </label> -->
+          <input type="number" id="price" placeholder="Price" name="price" required>
+          <input type="hidden" name="ticker" value="<?php echo $row1['ticker'];?>"/>
+          <input type="submit" class="btn">Buy</input>
+          <input type="button" class="btn cancel" onclick="closeForm()">Sell</input>
+        </form>
+      </div>
+    </div>
     <script>
   $(document).ready(function() {
     setInterval(function() {
       $("#quotes").load(window.location.href + " refresh", function() { console.log("loaded") });
     }, 5000);
   });
+
+  function openForm() {
+        document.getElementById("popupForm").style.display = "block";
+      }
+      function closeForm() {
+        document.getElementById("popupForm").style.display = "none";
+      }
+
+  function reply_click(clicked_id)
+  {
+    //   alert("Clicked " + clicked_id);
+      document.getElementById("showTicker").innerHTML = clicked_id;
+  }
+</script>
 </script>
 </body>
 </html>
