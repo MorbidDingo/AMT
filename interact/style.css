@@ -1,0 +1,298 @@
+/* social media css */
+
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+.container {
+    width: 450px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 1em 0 0 0;
+}
+.checkbox {
+    width: 140px;
+    height: 40px;
+    position: relative;
+    margin: 0.5em 0;
+}
+.checkbox input {
+    position: absolute;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    appearance: none;
+    -webkit-appearance: none;
+}
+.box {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    background: #f7f7f7;
+    border: 2px solid #d1d1d1;
+    color: rgb(63, 63, 63);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: all 0.6s;
+}
+.box i {
+    margin-right: 0.3em;
+}
+.box p {
+    transition: all 0.2s;
+}
+.checkbox input:checked ~ .box p {
+    transform: translateY(-30px);
+}
+.box p::before {
+    content: attr(data-text);
+    position: absolute;
+    transform: translateY(30px);
+}
+.checkbox input:checked ~ .box p::before {
+    transform: translateY(30px);
+}
+.checkbox input:checked ~ .box {
+    background: #f7f7f7;
+    border: 2px solid #185ADB;
+    color: #185ADB;
+}
+
+
+/* images css */
+
+
+
+.row {
+    margin: 0;
+  }
+  /* Compiled coding for cards */
+  .cs-cards figure,
+  .cs-cards figure > figcaption {
+    background-color: white;
+    color: black;
+  } /* sets default colors and bg */
+  .cs-cards figure > figcaption > h1,
+  .cs-cards figure > figcaption > h2,
+  .cs-cards figure > figcaption > h3,
+  .cs-cards figure > figcaption > h4,
+  .cs-cards figure > figcaption > h5 {
+    color: black;
+  } /* sets default colour for headings */
+  .cs-cards figure.card {
+    margin: 0;
+  } /* remove bootstrap card margin */
+  .cs-cards figure {
+    width: 250px;
+    height: 250px;
+  } /* set max size of team cards */
+  .cs-cards .expander {
+    /* upward arrow to suggest interactivity */
+    width: 100%;
+    text-align: right;
+    padding-right: 10px;
+    position: absolute;
+    bottom: 0;
+  }
+  .cs-cards .expander i {
+    min-height: 32px;
+    font-size: 24px;
+    color: black;
+    padding: 0 3px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-bottom: none;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+  .cs-cards img {
+    max-width: 100%;
+    height: auto;
+  } /* sets image size to full container */
+  .cs-cards figcaption a {
+    cursor: pointer;
+  } /* restore link pointer */
+  .cs-cards h3 {
+    color: inherit;
+    margin-bottom: 0;
+  } /* set heading to inherit colour from parent */
+  .cs-cards a.btn {
+    position: relative;
+  } /* restores button to relativity*/
+  .cs-cards a.btn,
+  .cs-cards a.btn:hover {
+    color: #ffffff;
+  } /* sets default and hover font colour of button */
+  .cs-cards .imgbghover {
+    /* image inserted via javascript */
+    width: 100%;
+    height: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    -webkit-filter: blur(10px) opacity(0.4);
+    filter: blur(10px) opacity(0.4);
+  }
+  .cs-modal-footer {
+    padding: 1rem !important; /* overrides row default padding */
+    border-top: 1px solid #e9ecef;
+  }
+  .cs-gallery figure {
+    width: auto;
+    height: auto;
+  }
+  
+  ul.social-links {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+  ul.social-links a {
+    color: rgb(96, 96, 96);
+  } /* sets default colour which can be overridden in individual sections */
+  ul.social-links.social-light a {
+    color: rgb(255, 255, 255);
+  } /* sets lighter default colour */
+  ul.social-links > li {
+    margin: 0;
+  }
+
+
+
+
+  /* search bar */
+
+  body .bbbootstrap {
+    background-image: url(https://res.cloudinary.com/dxfq3iotg/image/upload/v1566917764/Add_a_heading.png) !important;
+    background-size: cover;
+    padding: 180px 0 30px 0;
+}
+
+.bbbootstrap {
+    padding: 40px;
+    margin-bottom: 22px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    background-color: #2e9df7;
+    -webkit-box-shadow: 0 15px 15px -15px rgba(0, 0, 0, 0.25) inset, 0 -15px 15px -15px rgba(0, 0, 0, 0.25) inset;
+    box-shadow: 0 15px 15px -15px rgba(0, 0, 0, 0.25) inset, 0 -15px 15px -15px rgba(0, 0, 0, 0.25) inset;
+}
+
+.bbbootstrap form {
+    position: relative;
+    width: 540px;
+    margin: 22px auto 0;
+}
+
+span {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+}
+
+
+.bbbootstrap form input[type="text"] {
+    padding: 15px 20px;
+    padding-right: 100px;
+    border-color: transparent;
+    border-radius: 4px;
+}
+input.InputBox{
+    font-family: "lucida grande", "Lucida Sans Unicode", tahoma, sans-serif;
+    color: #333;
+    font-size: 15px;
+    padding: 3px;
+    margin: 0;
+    width: 250px;
+    background: #fff;
+    border: 1px solid #999;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+
+input[type=text] {
+    box-sizing: border-box;
+}
+
+.InputBox {
+    display: block;
+    width: 100% !important;
+    padding: 6px 12px;
+    font-size: 15px;
+    line-height: 22px;
+    border-radius: 4px;
+}
+
+.bbbootstrap form input[type="submit"] {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    float: right;
+    padding: 10px 25px;
+}
+
+body .Button, body .button {
+    background-color: #1268b3;
+    background-image: none;
+}
+
+
+.Button, .Button:hover, .Button:focus, .Button:active {
+    text-shadow: none;
+    border-color: transparent;
+}
+
+.Button {
+    display: inline-block;
+    padding: 6px 12px;
+    vertical-align: middle;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 22px;
+    text-transform: uppercase;
+    border: transparent solid 1px;
+    border-radius: 3px;
+    -webkit-transition: -webkit-box-shadow 50ms;
+    transition: -webkit-box-shadow 50ms;
+    -o-transition: box-shadow 50ms;
+    transition: box-shadow 50ms;
+    transition: box-shadow 50ms, -webkit-box-shadow 50ms;
+    -webkit-font-smoothing: inherit;
+    color: #fff;
+    
+}
+
+
+
+
+
