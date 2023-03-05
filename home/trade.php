@@ -1,317 +1,187 @@
 <?php
-    include('head.php');
-?>
+    include('../home/head.php');
+    include('../login/config.php');
 
+    $id = $_SESSION['user_id'];
+
+    $apis = Array();
+    $i = 0;
+
+    $apis = ['KDO3T9VUTSBFZ95I','Z9B7UL3A9RJJRWTH','H2L0FSX173Z8UGLH', '8OPGJ66I9KZJ0138','5Y6IMVRFWYOYC33K'];
+    $count = 0;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <style>
-        .stocklist:hover
-        {
-            cursor: pointer;
-        }
-    </style>
-
+    <title>Trade</title>
 </head>
+
+<style>
+
+    .row
+    {
+        /* border-right: 1px solid black;*/
+        
+        padding-bottom: 5px;
+        height: 100%;
+    }
+    .expanded 
+    {
+        width: 100%;
+        height: 200%;
+        transition-duration: 300ms;
+        margin-top: 10px;
+    }
+
+    .card
+    {
+            transition-duration: 300ms;
+            margin-top: 10px;
+            border-radius: 25px;
+            background-color: black;
+            color: white;
+            height: 40%;
+    }
+
+    img
+    {
+        margin-left: 5px;
+        margin-top: 10px;
+    }
+
+    .col-2,.col-3,.col-5
+    {
+        border: 1px solid black;
+        /* border-radius: 25px; */
+    }
+
+    .col-6
+    {
+        /* border-right: 1px solid black; */
+        /* border-left: 1px solid black; */
+        height: 100%;
+        border-right: 1px solid #474E68;
+        margin-top: 5px;
+    }
+
+    .col-6 .container-fluid
+    {
+        /* overflow-y: auto; */
+        border-radius: 25px;
+        /* border-bottom: 2px solid black; */
+    }
+
+    .col-12
+    {
+        height: 100%;
+        /* border-radius: 25px; */
+        /* border-right: 1px solid black; */
+    }
+
+    .card-title
+    {
+        border-radius: 25px;
+    }
+
+    .card-title:hover
+    {
+        background-color: white;
+    }
+
+    h3
+    {
+        border-bottom: 1px solid black;
+    }
+</style>
+
 <body>
-
-
-<h2 class="card-title border-bottom border-dark" style="text-align: center;" id="main">Trade</h2>
-                    
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3 border" style="margin-top:0vh; height: 93vh; color: white; background-color: rgb(20, 40, 60); border-radius: 0px; width: 95.1vw;">
-                <div class="row">
-                        <div class="col-md-12 border" style="height:41vh; overflow-y:auto; overflow-x:hidden">
-                            <div class="row">
-                                <div class="col-md-6 border-bottom" style="border-right: 1px solid white;">
-                                    Nifty
-                                </div>
-                                <div class="col-md-6 border-bottom">
-                                    <form action="<?php $_SERVER['PHP_SELF']?>" method="post">
-                                        <input type="text" placeholder="Search" name="search" autocomplete="off" id="search">
-                                        <input type="submit" name="submit" value="Submit" id="subi">
-                                    </form>
-                                        <?php
-                                            $ar = 0.0;
-                                            if (isset($_POST['submit']))
-                                            {
-                                                $t = $_POST['search'];
-                                                echo $t;                                                                                                        
-                                                $json = file_get_contents("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=$t&apikey=Z9B7UL3A9RJJRWTH");
-                                                $data = json_decode($json,true);
-                                                $ar = $data['Global Quote'];
-                                            }
-                                        ?>
-                                                                                       
-                                </div>
-                                <div class="col-md-7 border" style="overflow-y:auto; overflow-x:hidden">
-                                    Ticker
-                                </div>
-                                <div class="col-md-5">
-                                    Prices
-                                </div>
-                                <div class="col-md-7 border" style="overflow-y:auto; overflow-x:hidden">
+        <div class="row" style="border-bottom: 2px solid black;">
+            <div class="col-6">
+            <h3 class="heading-6 animate__animated animate__bounceIn">Dow 30</h3>
+                <!-- All stocks with prices -->
+                <div class="container-fluid" style="height: 50vh">
+                    <div class="row">
+                        <div class="col-12" style="overflow-y: auto;">
+                        <?php
+                            $sql = "SELECT * FROM stocks";
+                            $api = "SELECT * FROM apis";
+                            $result1 = $conn->query($sql);
+
+
+                            if ($result1->num_rows > 0) {
+                                while($row1 = $result1->fetch_assoc()) 
+                                {
+                        ?>
+                            <div class="card animate__animated">
+                                <div class="card-title">
+                                <img src='https://companiesmarketcap.com/img/company-logos/64/<?php echo $row1["ticker"];?>.webp'/>
                                     <?php
-                                    $id = $_SESSION['user_id'];
-                                                $servername = "localhost";
-                                                $username = "root";
-                                                $password = "";
-                                                $databasename = "amt";
-                                                
-                                                // CREATE CONNECTION
-                                                $conn = mysqli_connect($servername, 
-                                                  $username, $password, $databasename);
-                                                
-                                                // GET CONNECTION ERRORS
-                                                if (!$conn) {
-                                                    die("Connection failed: " . mysqli_connect_error());
-                                                }
-                                                
-                                                // SQL QUERY
-                                                $query = "SELECT Ticker FROM `stocks` order by name asc;";
-                                                // FETCHING DATA FROM DATABASE
-                                                $result = $conn->query($query);
-  
-                                                if ($result->num_rows > 0) 
-                                                {
-                                                    // OUTPUT DATA OF EACH ROW
-                                                    while($row = $result->fetch_assoc())
-                                                    {
-                                                        ?>
-                                                            <div class="stocklist" id="a"><?php echo $row["Ticker"] ?></div>
-                                                        <?php
-                                                    }
-                                                } else {
-                                                    echo "0 results";
-                                                }
-                                                
-                                                
-                                            ?>
-                                            </div>
-                                            <style>
-                                                .stocklist{
-                                                    border: 0px solid white; 
-                                                    cursor: pointer;
-                                                    padding-left: -10px;
-                                                }
-                                                /* #a:hover ~ #stockPrice
-                                                {
-                                                    /* not(.stocklist); */
-                                                    /* margin-left: 3vw; */
-                                                    /* transition-duration: 200ms; */
-                                                    /* border-bottom: 1px solid white; */
-                                                    /* border-top: 1px solid white; */
-                                                    /* backdrop-filter: blur(10px); */
-                                                    /* background-color: black; */
-                                                    /* -webkit-filter: blur(2px); */
-                                                    /* -moz-filter: blur(2px);
-                                                    -o-filter: blur(2px);
-                                                    -ms-filter: blur(2px); */
-                                                    /* filter: blur(2px);   */
-                                                /* } */
-
-                                                /* #stockPrice:hover
-                                                {
-                                                    transition-duration: 200ms;
-                                                    border-bottom: 1px solid white;
-                                                    border-top: 1px solid white;
-                                                    backdrop-filter: blur(10px);
-                                                    background-color: black;
-                                                    margin-left: -40vw;
-                                                } */
-                                                /* Button used to open the contact form - fixed at the bottom of the page */
-                                                .open-button {
-                                                background-color: #555;
-                                                color: white;
-                                                padding: 16px 20px;
-                                                border: none;
-                                                cursor: pointer;
-                                                opacity: 0.8;
-                                                position: fixed;
-                                                bottom: 23px;
-                                                right: 28px;
-                                                width: 280px;
-                                                }
-
-                                                /* The popup form - hidden by default */
-                                                .form-popup {
-                                                display: none;
-                                                position: fixed;
-                                                bottom: 0;
-                                                right: 15px;
-                                                border: 3px solid #f1f1f1;
-                                                z-index: 9;
-                                                /* margin-left: 20vh; */
-                                                }
-
-                                                /* Add styles to the form container */
-                                                .form-container {
-                                                max-width: 300px;
-                                                padding: 10px;
-                                                background-color: white;
-                                                margin-left: 20vw;
-                                                }
-
-                                                /* Full-width input fields */
-                                                .form-container input[type=text], .form-container input[type=password] {
-                                                width: 100%;
-                                                padding: 15px;
-                                                margin: 5px 0 22px 0;
-                                                border: none;
-                                                background: #f1f1f1;
-                                                }
-
-                                                /* When the inputs get focus, do something */
-                                                .form-container input[type=text]:focus, .form-container input[type=password]:focus {
-                                                background-color: #ddd;
-                                                outline: none;
-                                                }
-
-                                                /* Set a style for the submit/login button */
-                                                .form-container .btn {
-                                                background-color: #04AA6D;
-                                                color: white;
-                                                padding: 16px 20px;
-                                                border: none;
-                                                cursor: pointer;
-                                                width: 100%;
-                                                margin-bottom:10px;
-                                                opacity: 0.8;
-                                                }
-
-                                                /* Add a red background color to the cancel button */
-                                                .form-container .cancel {
-                                                background-color: red;
-                                                }
-
-                                                /* Add some hover effects to buttons */
-                                                .form-container .btn:hover, .open-button:hover {
-                                                opacity: 1;
-                                                }
-                                            </style>
-                                            <div class="col-md-5 border">
-                                                <?php
-                                                // SQL QUERY
-                                                $q = "SELECT close FROM `stocks`;";
-                                                // FETCHING DATA FROM DATABASE
-                                                $re = $conn->query($q);
-                                                    while($r = $re->fetch_assoc())
-                                                    {
-                                                        ?>
-                                                            <div class="stocklist" id="stockPrice" onclick="openForm()"><?php echo $r["close"] ?></div>
-                                                        <?php
-                                                    }
-                                                ?>
-                                            </div>
-                                            <script>
-                                                function openForm() {
-                                                document.getElementById("myForm").style.display = "block";
-                                                }
-
-                                                function closeForm() {
-                                                document.getElementById("myForm").style.display = "none";
-                                                }
-
-                                                // $(function() {
-                                                // $('#a').hover(function() {
-                                                //     $('#stockPrice').css('background-color', 'yellow');
-                                                // }, function() {
-                                                //     // on mouseout, reset the background colour
-                                                //     $('#stockPrice').css('background-color', '');
-                                                // });
-                                                // });
-      
-                                            </script>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="form-popup" id="myForm">
-                                    <form action="/action_page.php" class="form-container">
-                                        <h1>Login</h1>
-
-                                        <label for="email"><b>Email</b></label>
-                                        <input type="text" placeholder="Enter Email" name="email" required>
-
-                                        <label for="psw"><b>Password</b></label>
-                                        <input type="password" placeholder="Enter Password" name="psw" required>
-
-                                        <button type="submit" class="btn">Login</button>
-                                        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                                    </form>
-                                    </div>
-                                    <div class="col-md-12 border border-bottom-0" style="height:41vh" id="watch">
-                                        <?php
-                                        if($ar!=0.0)
-                                            print_r($ar);
-                                        else
-                                            echo "";
-                                        ?>
-                                    </div>
+                                    echo $row1["name"]."\t\t";
+                                    ?>
                                 </div>
-                            </div>
-                            <div class="col-md-9 border" style="margin-top:0vh; height: 93vh; color: white; background-color: rgb(20, 40, 60); border-radius: 0px; width: 95.1vw;">
-                                <?php
-                                    $showHoldings = "SELECT * FROM holdings where id = '$id'";
 
-                                    $res = $conn->query($showHoldings);
-  
-                                                if ($res->num_rows > 0) 
-                                                {
-                                                    // OUTPUT DATA OF EACH ROW
-                                                    while($row = $result->fetch_assoc())
-                                                    {
-                                                        ?>
-                                                            <li class="stocklist"><?php echo $row["ticker"] ?><p><?php echo $row["avg"] ?></p>
-                                                        <?php
-                                                    }
-                                                } else {
-                                                    echo "Please buy shares to display Holdings here.";
-                                                }
+                                <div class="card-body" id="quotes">
+                                
+                                    <?php
 
+                                    // if ($result2->num_rows > 0) {
+                                    //     while($row2 = $result2->fetch_assoc()) {                                
+                                        // $json = file_get_contents("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=".$row1['ticker']."&apikey=".$apis[0]);
+
+                                        // $data = json_decode($json,true);
+                                        $url = "https://query1.finance.yahoo.com/v8/finance/chart/".$row1['ticker']."?region=US&lang=en-US&includePrePost=false&interval=1m&useYfid=true&range=1d";
+                                        $data = json_decode(file_get_contents($url), true);
+                                        $price = $data['chart']['result'][0]['meta']['regularMarketPrice'];
+                                        $latestPrices = "UPDATE stocks SET close = ".$price." where ticker = '".$row1['ticker']."'";
+
+                                        if ($conn->query($latestPrices) === TRUE) {
+
+                                        } else 
+                                        {
+                                        echo "Error: " . $latestPrices . "<br>";
+                                        }
+                                            echo "|Price: ".$price."\t|";
+                                    //     }
+                                    // }                                        
+                                    ?>
+                                </div>
+                                <div class="card-footer" style="margin-top: -2rem;">
+                                    <input type="submit" class="btn btn-success align-self-end" value="Buy" name="buy" id="buy"/>
+                                    <input type="submit" class="btn btn-danger align-self-end" value="Sell" name="sell" id="sell" style="margin-left: 0.5rem;"/>
+                                    <input type="button" value="Watchlist +" class="btn btn-primary text-right" style="margin-left: 25rem;">
+                                </div>
+                                </div>
+                                <?php                                         
+                                    }
+                                 } else {
+                                    echo "0 results";
+                                    }
                                     $conn->close();
                                 ?>
-                            </div>
                         </div>
                     </div>
-                    
-                    <script>
- $(document).ready(function() {
- 
- $("#subi").click(function() {
-//  $("#watchlist").load("apiCalls.php");
- var ticker = $("#sea").val();
- 
- if(ticker=='') {
- alert("Please enter a valid ticker");
- return false;
- }
- 
- $.ajax({
- type: "POST",
- url: "apiCalls.php",
- data: {
- ticker: ticker
- },
- cache: false,
- success: function(data) {
- alert(data);
- },
- error: function(xhr, status, error) {
- console.error(xhr);
- }
- });
- 
- });
- 
- });
+                </div>
+            </div>
+            <!-- Watchlist -->
+            <div class="col-6">
+                <h3 class="heading-6 animate__animated animate__bounceIn">My Watchlist</h3>
+                <div class="card placeholder-glow">
+                    <h5 class="card-title placeholder-glow">
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+  $(document).ready(function() {
+    setInterval(function() {
+      $("#quotes").load(window.location.href + " refresh", function() { console.log("loaded") });
+    }, 5000);
+  });
 </script>
 </body>
 </html>
-                    
