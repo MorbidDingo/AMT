@@ -4,6 +4,8 @@
 
     $id = $_SESSION['user_id'];
 
+    $ticker = '';
+
     // $apis = Array();
     // $i = 0;
 
@@ -190,7 +192,7 @@
                                 <div class="card-title">
                                 <img src='https://companiesmarketcap.com/img/company-logos/64/<?php echo $row1["ticker"];?>.webp'/>
                                     <?php
-                                    $_SESSION['ticker'] = $row1["ticker"];
+                                    // $_SESSION['ticker'] = $row1["ticker"];
                                     echo $row1["name"]."\t\t";
                                     ?>
                                 </div>
@@ -208,6 +210,7 @@
                                         $data = json_decode(file_get_contents($url), true);
                                         $price = $data['chart']['result'][0]['meta']['regularMarketPrice'];
                                         $latestPrices = "UPDATE stocks SET close = ".$price." where ticker = '".$row1['ticker']."'";
+                                        $ticker = $row1['ticker'];
 
                                         if ($conn->query($latestPrices) === TRUE) {
 
@@ -249,9 +252,7 @@
     </div>
 
 
-                                <?php
-                                  $ticker = $_SESSION['ticker'];
-                                ?>
+                                
                                 <div class="loginPopup">
                                   <div class="formPopup animate__animated animate__zoomInDown" id="popupForm">
                                     <form action="tradeBack.php" method= "GET" class="formContainer">

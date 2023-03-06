@@ -10,7 +10,7 @@ window.onload = function() {
 
 $("#run").click(function(){
     $.ajax({
-        url: "server.php",
+        url: "save.php",
         method: "POST",
         data: {
             code: editor.getSession().getValue(),

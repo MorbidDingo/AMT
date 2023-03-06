@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="market.css">
     <script src="market.js"></script>
     <style>
+
       .sidebar {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
@@ -77,10 +78,13 @@
     transition: 0.3s;
   }
 
-
-
-
-
+  .item.active {
+  overflow: scroll;
+  z-index: 1;
+  width: 100%;
+  height: 110%;
+  transition: top .225s, width .3s, height .3s;
+}
   
   /* Position and style the close button (top right corner) */
   .sidebar .closebtn {
@@ -152,7 +156,7 @@
   $strategies = $conn->query($fetch);
 ?>
 
-<div class="col-md-12" style="height: 90.1vh">
+<div class="col-md-11" style="height: 83vh; margin-top: -5rem; margin-left: 5rem;">
   
     <div id="app">
   <div class="app-container">

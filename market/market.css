@@ -43,10 +43,10 @@ body {
 }
 
 #app {
-  width: 100%;
-  height: 80vh;
+  width: 70%;
+  height: 80%;
   border-radius: 25px;
-  margin-top: 8vh;
+  margin-top: -10vh;
   overflow: scroll;
   background-color: #fff;
   box-shadow: 0 24px 80px -14px rgba(0,0,0,.34);
@@ -144,7 +144,7 @@ body {
   overflow: scroll;
   z-index: 1;
   width: 100%;
-  height: 90%;
+  height: 80vh;
   transition: top .225s, width .3s, height .3s;
 }
 
@@ -157,7 +157,7 @@ body {
 }
 
 .item.active .close {
-  opacity: 1;
+  opacity: 0.4;
   visibility: visible;
 }
 

@@ -14,6 +14,7 @@
 </head>
 <body>
     <div class="header">
+    <a href="../Editor/enterAutomation.php" class="btn btn-primary">< Back</a>
         <h1>Python Compiler</h1>
         <button class="run" id="run">Run</button>
         <textarea id="name" placeholder="Enter filename"></textarea>
