@@ -23,6 +23,10 @@
         transform: scale(1.1);
         transition-duration: 200ms;
       }
+      #home{
+        overflow-y: auto;
+        height: 92vh;
+      }
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -72,7 +76,7 @@
           <span class="tooltip">Interact</span>
         </li>
         <li>
-          <a href="#">
+          <a href="#" id="Update">
             <i class='bx bxs-user-account'></i>
             <span class="title">Account</span>
           </a>
@@ -170,10 +174,15 @@ $(document).ready(function(){
 
 $(document).ready(function(){
   $("#interact").click(function(){
-    $("#home").load("../community/community.php");
+    $("#home").load("../interact/community.php");
   });
 });
 
+$(document).ready(function(){
+  $("#Update").click(function(){
+    $("#home").load("../Update_Info/update.php");
+  });
+});
 
 function showHint(str) {
   if (str.length == 0) {

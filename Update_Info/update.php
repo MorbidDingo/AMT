@@ -1,6 +1,6 @@
 <?php
 @include 'config.php';
-session_start();
+@include 'head.php';
 if(isset($_POST['submit'])){
     $id = mysqli_real_escape_string($conn, $_POST['id']);
     $name=mysqli_real_escape_string($conn,$_POST['name']);
@@ -11,6 +11,7 @@ if(isset($_POST['submit'])){
     $bank=md5($_POST['bank']);
 
     $_SESSION['user'] = $id;
+    // $current=$_SESSION['user'];
 
     // checking whether the user is exits or not (query)
     $select="SELECT*FROM user_form WHERE id='$id'";
@@ -26,7 +27,6 @@ if(isset($_POST['submit'])){
 
           $query = "UPDATE user_form SET name='$name',email='$email',password='$pass',user_type='$user_type', bank='$bank' where id='$id' ";
 
-            // $insert="INSERT INTO user_form(id,name,email,password,user_type,bank) VALUES('$id','$name','$email','$pass','$user_type','$bank')";
            $result2=mysqli_query($conn,$query);
             
         }
@@ -44,7 +44,7 @@ if(isset($_POST['submit'])){
 <html>
 <head>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../Update_info/style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -65,11 +65,11 @@ if(isset($_POST['submit'])){
   <div class="form-container">
     <form action="" method ="post">
 
-
-<input type="text" name="id" required   autocomplete="off" placeholder="Enter a unique ID"><br>      
-      <input type="text" name="name" required  autocomplete="off" placeholder="Enter Your Name"><br>
-      <input type="email" name="email" required  autocomplete="off" placeholder="Enter Your Email"><br>
-      <input type="password" name="password" required  autocomplete="off" placeholder="Enter Your Password"><br>
+      
+      <input type="text" name="id" required   autocomplete="off" placeholder=""><br>      
+      <input type="text" name="name" required  autocomplete="off" placeholder="Update Your Name"><br>
+      <input type="email" name="email" required  autocomplete="off" placeholder="Update Your Email"><br>
+      <input type="password" name="password" required  autocomplete="off" placeholder="Update Your Password"><br>
       <input type="password" name="cpassword" required  autocomplete="off" placeholder="Confirm Your Password"><br>
       <select name="user_type">
         <option value="bank">Select your Bank</option>
@@ -81,11 +81,10 @@ if(isset($_POST['submit'])){
         <option value="sbi">SBI</option>
         <option value="kotak">KOTAK</option>
       </select><br>
-      <input type="number" name="bank" required  autocomplete="off" placeholder="Enter Your Account number"><br>
+      <input type="number" name="bank" required  autocomplete="off" placeholder="Update Your Account number"><br>
 
        <input type="submit" name="submit" value="Update" class="form-btn">
 
-       <input type="submit" name="submit" value="Add Funds" class="form-btn">
        
        <!-- <button onclick="window.location.href = 'Funds.php';" class="form-btn">HOME</button> -->
 
