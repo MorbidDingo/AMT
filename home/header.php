@@ -22,7 +22,7 @@
 
                 <a class="btn btn-primary" href="../funds/displaytable.php" role="button">Funds +</a>
                 <form action="../login/destroy.php" method="post">
-                    <input type="submit" class="btn btn-primary" name="destroy" value="Logout" style="margin-left: 2rem;">
+                    <input type="submit" class="btn btn-primary" name="destroy" value="Logout" style="margin-left: 1rem;">
                 </form>
             </div>
         </div>

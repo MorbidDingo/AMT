@@ -88,7 +88,7 @@
         <div class="row">
             <div class="col-12" style="height: 5vh; margin-top:-3vh;"></div>
                 <div class="form-container">
-                    <form action="../Editor/strategyRunnner.php" method="post">
+                    <form action="../Editor/strategySave.php" method="post">
                         <div class="card">
                             <!-- Strategy Details -->
                             <div class="card-title"><h3>Strategy Details</h3></div>
@@ -164,7 +164,7 @@
 
                             <!-- Time Period 1 -->
 
-                            <input type="number" min="0" placeholder="Time Period" name="time2" id="ti1" disabled = "disabled">
+                            <input type="number" min="0" placeholder="Time Period" name="time1" id="ti1" disabled = "disabled">
 
                             <!-- Chart interval settings 1 -->
 

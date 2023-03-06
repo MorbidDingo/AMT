@@ -151,7 +151,7 @@
 
 <!-- cards -->
 <?php
-  $fetch = "SELECT * FROM strategies where privacy='0'";
+  $fetch = "SELECT * FROM strategies where privacy='1'";
 
   $strategies = $conn->query($fetch);
 ?>
@@ -172,14 +172,14 @@
       </div>
       
       <div class="item-title">
-        <h4><?php echo $row['id'] ?></h4>
-        <h3><?php echo $row['name'] ?></h3>
+        <h4>Strategy ID: <?php echo $row['id']?></h4>
+        <h3> <?php echo $row['name'] ?></h3>
       </div>
       <div class="item-image">
         <img src="https://imgur.com/gwi3Vcj.jpg">
       </div>
       <div class="item-content">
-        <p><strong><?php echo $row['id']."'s strategy." ?></strong></p>
+        <p><strong><?php echo $row['uid']."'s strategy." ?></strong></p>
         <p> <?php echo $row['descr'] ?> </p>
       </div>
     </div>
