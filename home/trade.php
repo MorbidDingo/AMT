@@ -182,7 +182,6 @@
                             $api = "SELECT * FROM apis";
                             $result1 = $conn->query($sql);
 
-
                             if ($result1->num_rows > 0) {
                                 while($row1 = $result1->fetch_assoc()) 
                                 {

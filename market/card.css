@@ -1,0 +1,102 @@
+
+[data-bg-color="-app-color-1"] {
+    background-color: rgba(56, 145, 166, 1);
+}
+[data-bg-color="-app-color-2"] {
+    background-color: rgba(76, 91, 92, 1);
+}
+[data-bg-color="-app-color-3"] {
+    background-color: #fde74c;
+}
+[data-bg-color="-app-color-4"] {
+    background-color: rgba(219, 84, 97, 1);
+}
+[data-bg-color="-app-color-5"] {
+    background-color: rgba(227, 101, 91, 1);
+}
+[data-bg-color="-app-color-6"] {
+    background-color: #9381ff;
+}
+.container {
+    /* margin: 0 auto; */
+    width: 100%;
+    height: 100%;
+    /* position: relative; */
+    justify-content: center;
+    /* display: grid; */
+    margin-top: -4rem;
+    margin-left: -20rem;
+}
+.o-apps {
+    /* display: flex; */
+    margin-bottom: -30px;
+    width: 5rem;
+    flex-wrap: wrap;
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+    margin-left: -10rem;
+}
+.o-apps > * {
+    margin: 0 15px 30px;
+}
+.-app-open .o-apps {
+    transform: scale(0.8);
+}
+.c-app__holder {
+    display: none;
+}
+.c-app__tile {
+   margin-left: 5rem;
+    width: 70rem;
+    height: 100px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.c-app-container {
+    visibility: hidden;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform-origin: top left;
+    width: 100%;
+    min-height: 100vh;
+}
+.c-app-container__inner {
+   /* &__content{
+        background:red;
+        min-height:100vh;
+        transition:opacity .15s linear 0s;
+        .-app-open &{
+            opacity:1;
+       }
+   }
+    */
+    color: #fff;
+    padding: 50px;
+    opacity: 0;
+    transition: opacity 0.15s linear 0s;
+}
+.-app-open .c-app-container__inner {
+    opacity: 1;
+    transition: opacity 0.15s linear 0.15s;
+}
+.c-app-container__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 0;
+}
+.c-app-container__dismiss {
+    font-size: 24px;
+}
+.c-app-container__dismiss > * {
+    pointer-events: none;
+}
+.-app-open .c-app-container {
+    visibility: visible;
+    transition: transform 0.3s ease-in-out 0s, visibility 0s linear 0s;
+}
+.-app-close .c-app-container {
+    visibility: hidden;
+    transition: transform 0.3s ease-in-out 0s, visibility 0s linear 0.3s;
+}

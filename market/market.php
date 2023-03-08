@@ -2,6 +2,8 @@
       include ('../login/config.php');
       include ('../home/head.php');
       include('../home/header.php');
+
+      $n = $_SESSION['user_name'];
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -174,12 +176,22 @@
       <div class="item-title">
         <h4>Strategy ID: <?php echo $row['id']?></h4>
         <h3> <?php echo $row['name'] ?></h3>
+        <h4> Author ID: <?php echo $row['uid']?></h4>
+
+        <h5>Tags:</h3>
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-1"></div>
+          <div class="col-1"></div>
+          <div class="col-1"></div>
+          
+        </div>
       </div>
       <div class="item-image">
         <img src="https://imgur.com/gwi3Vcj.jpg">
       </div>
       <div class="item-content">
-        <p><strong><?php echo $row['uid']."'s strategy." ?></strong></p>
+        <p><strong><?php echo $n."'s strategy." ?></strong></p>
         <p> <?php echo $row['descr'] ?> </p>
       </div>
     </div>

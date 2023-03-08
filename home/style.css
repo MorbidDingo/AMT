@@ -1,7 +1,8 @@
+
+
 *
 {
-    font-style: normal;
-    font-family:'Trebuchet MS';
+    font-family: system-ui, -apple-system !important;
 }
 
 html, body

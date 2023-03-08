@@ -25,16 +25,17 @@ while( $record = mysqli_fetch_assoc($resultset) ) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 </head>
+
 <style>
 
 body{
-    margin-top:20px;
     color: #1a202c;
     text-align: left;
     background-color: #e2e8f0;    
 }
+
 .main-body {
-    padding: 15px;
+    padding: 1%;
 }
 .card {
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
@@ -49,26 +50,27 @@ body{
     background-color: #fff;
     background-clip: border-box;
     border: 0 solid rgba(0,0,0,.125);
-    border-radius: .25rem;
+    border-radius: 2rem;
 }
 
 .card-body {
     flex: 1 1 auto;
-    min-height: 1px;
-    padding: 1rem;
+    /* min-height: 1px; */
+    padding: 3%;
 }
 
 .gutters-sm {
-    margin-right: -8px;
-    margin-left: -8px;
+    margin-right: -1%;
+    margin-left: -1%;
 }
 
 .gutters-sm>.col, .gutters-sm>[class*=col-] {
-    padding-right: 8px;
-    padding-left: 8px;
+    padding-right: 2%;
+    padding-left: 2%;
 }
-.mb-3, .my-3 {
+.mb-3, .my-3, .mb-3:hover{
     margin-bottom: 1rem!important;
+    
 }
 
 .bg-gray-300 {

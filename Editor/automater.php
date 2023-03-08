@@ -249,6 +249,8 @@
                                 </label>
                                 <hr />
 
+                                <input type="text" class="form-control" placeholder="Quantity of scrip" name="quantity">
+
                                 <input type="text" id="limit" disabled="disabled" placeholder="Enter limit Price" min="0" name="limit"/>
 
                                 <input type="button" class="btn btn-primary" name="reset" id="choose" value="Choose a side (Buy or Sell)">
@@ -268,7 +270,6 @@
                         <div class="col-12" style="height: 5vh;display: block; float: left;"></div>
 
                         <!-- Save button -->
-                            
                         <input type="submit" class="btn btn-primary" id="save" value="Save" name="save"/>
 
                     </form>
@@ -303,6 +304,7 @@
             {
                 $("#t2").attr("disabled", "disabled");
                 $("#t1").removeAttr("disabled");
+                $("#ti1").removeAttr("disabled");
                 $("#e").removeAttr("disabled");
                 $("#ti2").attr("disabled", "disabled");
             }
