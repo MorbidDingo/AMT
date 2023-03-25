@@ -114,7 +114,7 @@ if(isset($_POST['submit']))
 
 	<div class="container">
         <a href="../home/index.php#" class="btn btn-primary">Home</a>
-        <a href="../funds/displaytable.php" class="btn btn-primary">Cancel</a>
+        <!-- <a href="../funds/displaytable.php" class="btn btn-primary">Cancel</a> -->
         <h2 class="text-center pt-4" style="color : #004AAD;">Transaction</h2>
             <?php
                 include '../login/config.php';

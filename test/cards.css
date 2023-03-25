@@ -9,9 +9,9 @@ body {
 body {
   font-family: 'Sen', sans-serif;
   background: rgb(248,248,248);
-  /* background: radial-gradient(circle, rgba(248,248,248,1) 40%, rgb(91, 91, 91) 100%);
+  background: radial-gradient(circle, rgba(248,248,248,1) 40%, rgba(148,224,233,1) 100%);
   background-repeat: no-repeat;
-  background-attachment: fixed; */
+  background-attachment: fixed;
 }
 
 @keyframes item-start {
@@ -20,7 +20,7 @@ body {
 }
 
 @keyframes item-bounce {
-  0% { margin-top: 5px }
+  0% { margin-top: 0 }
   75% { margin-top: -24px }
   100% { margin-top: 0 }
 }
@@ -35,7 +35,6 @@ body {
 .item.active {
   scrollbar-width: none;
   -ms-overflow-style: none;  
-  padding-top: 3rem;
 }
 
 #app::-webkit-scrollbar,
@@ -44,32 +43,30 @@ body {
 }
 
 #app {
-  width: 90vw;
-  height: 100%;
-  border-radius: 25px;
-  margin-top: 5%;
+  width: 375px;
+  height: 667px;
+  margin: 3rem auto;
+  border-radius: 20px;
   overflow: scroll;
   background-color: #fff;
   box-shadow: 0 24px 80px -14px rgba(0,0,0,.34);
-  margin-left: 5rem;
 }
 
 #app.noscroll {
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .app-container {
   position: relative;
   padding: 32px;
   box-sizing: border-box;
-  padding-top: 4rem;
 }
 
 .item {
   position: absolute;
   left: 50%;
-  width: 90%;
-  border-radius: 25px;
+  width: calc(100% - 64px);
+  border-radius: 10px;
   overflow: hidden;
   transition: all 1s;
   background-color: #fff;
@@ -115,23 +112,21 @@ body {
 .item-image {
   position: relative;
   /*height: 100%;*/
-  height: 13rem;
-  /* overflow-y: auto; */
-  width: 100%;
-  margin-left: 0vw;
+  height: 240px;
+  overflow: hidden;
 }
 
 .item-image img {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 100%;
+  width: 375px;⁄* 100vh */
   height: auto;
   transform: translate3d(-50%,-50%,0);
 }
 
 .item-content {
-  height: 0px;
+  height: 0;
   opacity: 0;
   overflow: hidden;
   padding: 0;
@@ -153,7 +148,6 @@ body {
 
 .item.active.bounce {
   animation: item-bounce .3s forwards;
-  height: 100%;
 }
 
 .item.collapsing.bounce {
@@ -206,107 +200,4 @@ h1,h2,h3,h4,h5,h6 {
 }
 .item-content strong {
   color: #000;
-}
-
-.sidebar {
-  height: 100%; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
-  top: 0;
-  left: 0;
-  background-color: #111; /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
-}
-
-/* The sidebar links */
-.sidebar a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-/* When you mouse over the navigation links, change their color */
-.sidebar a:hover {
-  color: #f1f1f1;
-}
-
-
-
-
-/* The sidebar label Capital */
-.sidebar label {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-/* When you mouse over the navigation links, change their color capital */
-.sidebar label:hover {
-  color: #f1f1f1;
-}
-
-
-/* The sidebar H3  */
-.sidebar h3 {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-/*  */
-/*  */
-/* Sidebar Starts */
-/*  */
-/*  */
-
-/* Position and style the close button (top right corner) */
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-/* The button used to open the sidebar */
-.openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #111;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-}
-
-.openbtn:hover {
-  background-color: #444;
-}
-
-.openbtn::after
-{
-  display: none;
-}
-
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main {
-  transition: margin-left .5s; /* If you want a transition effect */
-  padding: 20px;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
 }

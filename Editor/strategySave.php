@@ -52,7 +52,7 @@ $uid = $_SESSION['user_id'];
             else
             {
                 $indicator1 = $_POST['indicators1'];
-                $economic = $_POST['economic'];
+                $economic = $_POST['indicators2'];
                 $time1 = $_POST['time1'];
 
                 $strTable = "INSERT INTO strategies (id, uid, name, descr, privacy, indicator1, indicator2, time1, chart_interval) VALUES ('$strid', '$uid', '$name', '$descr', '$privacy', '$indicator1', '$indicator2', '$time1', '$interval')";
@@ -110,7 +110,7 @@ $uid = $_SESSION['user_id'];
             else
             {
                 $indicator1 = $_POST['indicators1'];
-                $economic = $_POST['economic'];
+                $economic = $_POST['indicators2'];
                 $time1 = $_POST['time1'];
 
                 $strTable = "INSERT INTO strategies (id, uid, name, descr, privacy, indicator1, indicator2, time1, chart_interval) VALUES ('$uid', '$name', '$descr', '$privacy', '$indicator1', '$indicator2', '$time1', '$interval')";

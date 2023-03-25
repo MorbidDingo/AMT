@@ -75,37 +75,24 @@
                                         <!-- </div> -->
                                         </div>
                                         <div class="col-md-4 border-start">
-                                            <div class="row">
-                                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-<!-- Modal -->
-                                            <div class="modal fade" id="myModal" role="dialog">
-                                            <div class="modal-dialog">
-                                            
-                                                <!-- Modal content-->
-                                                <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    <h4 class="modal-title">Modal Header</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Some text in the modal.</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                </div>
-                                                </div>
-                                                
+                                           <div class="row">
+                                            <div class="col-3">
+                                            <p style="color: white;"><?php echo $row['indicator1']; ?></p>
                                             </div>
+                                            <div class="col-3">
+                                            <p style="color: white;"><?php echo $row['indicator2']; ?></p>
+                                            </div>                                            
+                                            <div class="col-6">
+                                                Unique ID:
+                                            <?php echo $row['id']; ?>
                                             </div>
-
-
+                                           </div>
                                             </div>
                                         </div>
                                     </div>
                                    
                                 </div>
-                            </div>
+                            <!-- </div> -->
                                 <?php
                                         }
                                     }

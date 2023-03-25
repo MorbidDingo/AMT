@@ -86,9 +86,7 @@ body{
 
 </style>
 <body>
-    
-<div class="container-fluid">
-    <div class="main-body"  style="overflow-y:auto">
+        <div class="main-body"  style="overflow-y:auto">
     
     
           <div class="row gutters-sm">
@@ -164,7 +162,6 @@ body{
           </div>
 
         </div>
-    </div>
 
 <?php 
 }

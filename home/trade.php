@@ -224,7 +224,7 @@
                                 </div>
                                 <div class="card-footer" style="margin-top: -2rem;">
                                     <button class="btn btn-primary" value="Trade" name="trade" id="<?php echo $row1['ticker'];?>"  onclick="openForm();reply_click(this.id)">Trade</button>
-                                    <input type="button" value="Watchlist +" class="btn btn-primary text-right" style="margin-left: 25rem;">
+                                    <input type="button" value="Watchlist +" class="btn btn-primary text-right" style="margin-left: 25rem;" id="watch">
                                 </div>
                                 </div>
                                 <?php                                         
@@ -292,6 +292,23 @@
     //   alert("Clicked " + clicked_id);
       document.getElementById("showTicker").innerHTML = clicked_id;
   }
+
+  <script>
+            $(document).ready(function(){
+  
+            $("#watch").click(function() {
+                var stockname=$("#stockname").val();
+                $.ajax({
+                url:'../data/analysis_results.php',
+                data:{stockname: stockname},
+                type:'POST',
+                success:function(data) {
+                    $("#result").html(data);
+                }
+                });
+            });
+        });
+        </script>
 </script>
 </script>
 </body>

@@ -40,12 +40,12 @@ if(isset($_POST['modify']))
 <div class="form-container">
     <form class="form-container" action="ModifyConfirm.php" method="post">
     The strategy shall be public now <input type="checkbox" name="public" id="nameofid" value="1" checked>
-        <input type="text" class="form-control" name="fees" placeholder="Fees (Recommended - less than 1% of capital)" />
-        <input type="text" class="form-control" name="capital" placeholder="Capital Required" value="<?php echo $capital; ?> - this is an estimated value. Fees will be added to the total capital on market page." />
-        <input type="text" class="form-control" name="risk" placeholder="Risk Percent" />
-        <input type="text" class="form-control" name="profit" placeholder="Profit Percent" />
-        <input type="text" class="form-control" name="probability" placeholder="Probability Percent" />
-        <input type="hidden" name="strid" value="<?php echo $t; ?>"/>
+    <input type="text" class="form-control" name="fees" placeholder="Fees" value="<?php echo $row['fees']; ?>" />
+    <input type="text" class="form-control" name="capital" placeholder="Capital Required" value="<?php echo $row['capital']; ?>" />
+    <input type="text" class="form-control" name="risk" placeholder="Risk Percent" value="<?php echo $row['risk']; ?>" />
+    <input type="text" class="form-control" name="profit" placeholder="Profit Percent" value="<?php echo $row['profit']; ?>" />
+    <input type="text" class="form-control" name="probability" placeholder="Probability Percent" value="<?php echo $row['probability']; ?>" />
+    <input type="hidden" name="strid" value="<?php echo $t; ?>"/>
 
         <input type="submit" name="confirm"/>
     </form>
