@@ -208,30 +208,19 @@
 
                                         // $data = json_decode($json,true);
                                         
-                                        $url = "https://query1.finance.yahoo.com/v8/finance/chart/".$row1['ticker']."?region=US&lang=en-US&includePrePost=false&interval=1m&useYfid=true&range=1d";
-                                        $data = json_decode(file_get_contents($url), true);
-                                        $price = $data['chart']['result'][0]['meta']['regularMarketPrice'];
-                                        $latestPrices = "UPDATE stocks SET close = ".$price." where ticker = '".$row1['ticker']."'";
-                                        $ticker = $row1['ticker'];
+                                        // $url = "https://query1.finance.yahoo.com/v8/finance/chart/".$row1['ticker']."?region=US&lang=en-US&includePrePost=false&interval=1m&useYfid=true&range=1d";
+                                        // $data = json_decode(file_get_contents($url), true);
+                                        // $price = $data['chart']['result'][0]['meta']['regularMarketPrice'];
+                                        // $latestPrices = "UPDATE stocks SET close = ".$price." where ticker = '".$row1['ticker']."'";
+                                        // $ticker = $row1['ticker'];
 
-                                        if ($conn->query($latestPrices) === TRUE) {
+                                        // if ($conn->query($latestPrices) === TRUE) {
 
-                                        } else 
-                                        {
-                                        echo "Error: " . $latestPrices . "<br>";
-                                        }
-                                            ?><p style="color:white;" id="<?php echo $price; ?>"><?php echo "|Price: ".$price."\t|";?></p>
-                                            <?php
-                                    //     }
-                                    // }                                        
-                                    ?>
-                                    <script>
-                                      $(document).ready(function() {
-    setInterval(function() {
-      $("#<?php echo $price; ?>").load(window.location.href + " refresh", function() { console.log("loaded") });
-    }, 5000);
-  });
-                                      </script>
+                                        // } else 
+                                        // {
+                                        // echo "Error: " . $latestPrices . "<br>";
+                                        // }
+                                    ?><p style="color:white;" id="<?php echo $row1['ticker']; ?>"></p>
                                 </div>
                                 <div class="card-footer" style="margin-top: -2rem;">
                                     <button class="btn btn-primary" value="Trade" name="trade" id="<?php echo $row1['ticker'];?>"  onclick="openForm();reply_click(this.id)">Trade</button>
@@ -349,6 +338,45 @@ while( $recordor = mysqli_fetch_assoc($resultor) ) {
             });
         });
       }
+
+      // Fetch the stock symbols from the MySQL database using an AJAX request
+$.ajax({
+  url: "get_stock_symbols.php",
+  dataType: "json",
+  success: function(data) {
+    // Populate the stockSymbols array with the stock symbols returned by the PHP script
+    var stockSymbols = data;
+
+    // Define the updateStockPrices() function to fetch the latest close price for each stock symbol asynchronously using setTimeout()
+    function updateStockPrices() {
+      stockSymbols.forEach(function(symbol) {
+        setTimeout(function() {
+          $.ajax({
+            url: "https://query1.finance.yahoo.com/v8/finance/chart/" + symbol + "?interval=1d",
+            success: function(data) {
+              // Parse the JSON response and extract the latest close price
+              var closePrice = data.chart.result[0].indicators.quote[0].close.slice(-1)[0];
+              // Update the content of the <td> element for the current stock symbol with the latest close price
+              $("#" + symbol).html(closePrice);
+              // Send an AJAX request to the server to insert or update the latest close price in the MySQL database
+              $.ajax({
+                type: "POST",
+                url: "update_database.php",
+                data: { symbol: symbol, closePrice: closePrice }
+              });
+            }
+          });
+        }, Math.random() * 5000);
+      });
+
+      // Call this function again after 5 seconds to update the stock prices again
+      setTimeout(updateStockPrices, 5000);
+    }
+
+    // Call the updateStockPrices() function to start updating the stock prices
+    updateStockPrices();
+  }
+});
       
 </script>
 </body>

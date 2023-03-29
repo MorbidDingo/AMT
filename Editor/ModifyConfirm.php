@@ -17,7 +17,7 @@ if(isset($_POST['confirm']))
 
 if (mysqli_query($conn, $sql)) {
     ?>
-    <a href="../home/index.php" class="btn btn-success">< Return to Homepage</a>
+    <a href="../home/index.php#panel" class="btn btn-success">< Return to Homepage</a>
     <?php
   echo "Successfully updated strategy no. ".$strid."!";
 } else {

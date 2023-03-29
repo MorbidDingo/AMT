@@ -62,11 +62,19 @@
           <span class="tooltip">Trade</span>
         </li>
         <li>
-          <a href="#" id="analysis">
-            <i class='bx bx-chart'></i>
-            <span class="title">Analysis</span>
-          </a>
-          <span class="tooltip">Analysis</span>
+            <a href="#" id="tech">
+              <i class='bx bx-chart'></i>
+              <span class="title">Technical</span>
+            </a>
+            <span class="tooltip">Technical Analysis</span>
+        </li>
+        <li>
+            <span class="tooltip">Analysis</span>
+            <a href="#" id="funda">
+              <i class='bx bxs-business'></i>
+              <span class="title">Fundamental</span>
+            </a>
+            <span class="tooltip">Fundamental Analysis</span>
         </li>
         <li>
           <a href="#" id ="interact">
@@ -167,8 +175,14 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-  $("#analysis").click(function(){
-    $("#home").load("analysis.php");
+  $("#tech").click(function(){
+    $("#home").load("../test/chart.php");
+  });
+});
+
+$(document).ready(function(){
+  $("#funda").click(function(){
+    $("#home").load("../home/analysis.php");
   });
 });
 
