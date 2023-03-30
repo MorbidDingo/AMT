@@ -68,7 +68,7 @@
         .card
         {
             border: 1px solid blue;
-            border-radius: 40px;
+            border-radius: 100px;
         }
 
         .card-title:hover
@@ -134,7 +134,7 @@
                         <div class="col-12" style="height: 5vh;display: block; float: left;"></div>
 
                         <!-- Analysis Details -->
-                        <div class="card" style="background-color: none">
+                        <div class="card text-white bg-success mb-3" style="background-color: none">
                         <div class="card-title"><h3>Analysis Details</h3></div>
                         <div class="card text-white bg-warning mb-3">
                             <div class="card-title"><h5>Technical Indicator 1</h5></div>
@@ -165,10 +165,19 @@
                             <!-- Time Period 1 -->
 
                             <input type="number" min="0" placeholder="Time Period" name="time1" id="ti1" disabled = "disabled">
+                            
+                            <div class="card-title"><h5>Operation</h5></div>
+                            <select name="operation1" id="opt1" disabled>
+                                <option disabled selected>Select the condition</option>
+                                <option value="gt">Greater than</option>
+                                <option value="ge">Greater than equal to</option>
+                                <option value="lt">Less than</option>
+                                <option value="le">Less than equal to</option>
+                                <option value="e">Equal</option>                                
+                            </select>
 
-                            <!-- Chart interval settings 1 -->
-
-                        <div class="card text-white bg-warning mb-3">
+                            <!-- Indicator 2 -->
+                        <div class="card text-white bg-danger mb-3">
                             <div class="card-title"><h5>Technical Indicator 2</h5></div>
                             <select class="form-select" aria-label="Default select example" name="indicators2" id="ti2" disabled = "disabled">
                                 <option selected>Technical Indicator 2</option>
@@ -198,9 +207,23 @@
 
                             <input type="number" min="0" placeholder="Time Period" name="time2" id="t2" disabled = "disabled">
 
-                            <!-- Chart Interval Setting 2 -->
+                            <div class="card-title"><h5>Operation</h5></div>
+                            <select name="operation2" id="opt2" disabled>
+                                <option disabled selected>Select the condition</option>
+                                <option value="gt">Greater than</option>
+                                <option value="ge">Greater than equal to</option>
+                                <option value="lt">Less than</option>
+                                <option value="le">Less than equal to</option>
+                                <option value="e">Equal</option>                                
+                            </select>
 
-                            <select id="intervalSettings" name="interval">
+                            <!-- Chart Interval Setting -->
+
+                            
+                        </div>
+                        <div class="card text-dark bg-info mb-3"></div>
+                        <div class="card-title"><h5>Chart Interval Settings</h5></div>
+                        <select id="intervalSettings" name="interval">
                                 <option value="#" disabled selected>Chart Interval</option>
                                 <option value="1min">1min</option>
                                 <option value="5min">5min</option>
@@ -210,7 +233,6 @@
                                 <option value="weekly">weekly</option>
                                 <option value="monthly">monthly</option>
                             </select>
-                        </div>
     </div>
 
                             <!-- Economic Indicator-->
@@ -298,6 +320,8 @@
                 $("#ti1").removeAttr("disabled");
                 $("#t2").removeAttr("disabled");
                 $("#ti2").removeAttr("disabled");
+                $("#opt1").removeAttr("disabled");
+                $("#opt2").removeAttr("disabled");
                 $("#e").attr("disabled", "disabled");
                 // $("#limit").focus();
             } else if($("#either").is(":checked"))
@@ -307,6 +331,8 @@
                 $("#ti1").removeAttr("disabled");
                 $("#e").removeAttr("disabled");
                 $("#ti2").attr("disabled", "disabled");
+                $("#opt1").attr("disabled", "disabled");
+                $("#opt2").attr("disabled", "disabled");
             }
         });
     });
