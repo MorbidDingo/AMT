@@ -19,7 +19,7 @@
 
                     <div class="row">
                         <div class="col-md-10" id="heading-2">
-                            <h1 class="display-6 text-start" style="color: whitesmoke; margin-top: 2vh;">My Strategies</h1>
+                            <!-- <h1 class="display-6 text-start" style="color: whitesmoke; margin-top: 2vh;">My Strategies</h1> -->
                         </div>
 
                         <div class="col-md-2" id="heading-2" style="border-left: 0px solid black;">
@@ -148,7 +148,4 @@
   }
   
 });
-
-$('#myModal').modal(options)
-
         </script>

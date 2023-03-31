@@ -77,6 +77,15 @@ header, footer {
     overflow-y:auto;
 }
 
+th
+{
+  /* background-color: #c0c0c0; */
+    position:relative;
+    /* top:0; */
+    /* width:100%; */
+    /* z-index:100; */
+}
+
     </style>
 </head>
 <body>
@@ -97,7 +106,6 @@ header, footer {
 					</tr>
 				</thead>
 				<tbody>
-          <form action="updateOrder.php" method="post">
 					<tr>
                     <?php
                             $sql = "SELECT * FROM stocks";
@@ -115,12 +123,12 @@ header, footer {
                                     // $_SESSION['ticker'] = $row1["ticker"];
                                     echo $row1["name"]."\t\t";
                                     ?></td>
-						<td id="<?php echo $row1["ticker"];?>"></td>
-						<td><input type="number" min="1" name=""></td>
-						<td><button class="buy-button" onclick="buy()">Buy</button></td>
-						<td><button class="sell-button" id="sell" onclick="sell()">Sell</button></td>
+						<td id="<?php echo $row1["ticker"];?>"><?php echo $row1['close']; ?></td>
+						<td><input type="number" min="1" name="quantity" id="quantity"></td>
+						<td><button class="buy-button" id="buy" name="action" value="buy">Buy</button></td>
+						<td><button class="sell-button" id="sell" name="action" value="buy">Sell</button></td>
+            <input type="hidden" id="stockname" value="<?php echo $row1['ticker']; ?>" />
 					</tr>
-          </form>
 					<!-- <tr>
 						<td></td>
 						<td></td>
@@ -148,13 +156,14 @@ header, footer {
 			<h2>Orders</h2>
 			<table>
 					<tr>
-						<th>Type</th>
-						<th>Symbol</th>
-						<th>Quantity</th>
+          <th>Symbol</th>
+						<th>Side</th>
 						<th>Price</th>
-						<th>Status</th>
+						<th>Quantity</th>
+						<th>Target</th>
+						<th>Stoploss</th>
 					</tr>
-				<tbody>
+				<tbody id="displayorders">
 					<!-- display user's orders here -->
 				</tbody>
 			</table>
@@ -164,14 +173,13 @@ header, footer {
                 <div class="col-6">
                 <section id="orders">
 			<h2>Holdings</h2>
-			<table>
+			<table id="holdings">
 					<tr>
-						<th>Type</th>
-						<th>Symbol</th>
+						<th>Ticker</th>
 						<th>Quantity</th>
 						<th>Price</th>
-						<th>Status</th>
-					</tr>
+						<th>Profit/Loss</th>
+          </tr>
 				<tbody>
 					<!-- display user's orders here -->
 				</tbody>
@@ -183,8 +191,6 @@ header, footer {
 	<!-- <footer>
 
 	</footer> -->
-	<script src="app.js"></script>
-
     <script>
     // Define the updateStockPrices() function to fetch the latest close price for each stock symbol asynchronously using setTimeout()
     const stockSymbols = ['AAPL', 'AMGN', 'AXP', 'BA', 'CAT', 'CRM', 'CSCO', 'CVX', 'DIS', 'DOW', 'GS', 'HD', 'HON', 'IBM', 'INTC', 'JNJ', 'JPM', 'KO', 'MCD', 'MMM', 'MRK', 'MSFT', 'NKE', 'PG', 'TRV', 'UNH', 'V', 'VZ', 'WBA', 'WMT'];
@@ -206,44 +212,65 @@ header, footer {
               });
             }
           });
-        }, 5000);
+        }, 60000);
       });
 
       // Call this function again after 5 seconds to update the stock prices again
-      setTimeout(updateStockPrices, 1000);
+      setTimeout(updateStockPrices, 60000);
     }
 
     // Call the updateStockPrices() function to start updating the stock prices
     updateStockPrices();
 
-    function buy() {
-  updateOrder('buy');
-}
-
-function sell() {
-  updateOrder('sell');
-}
-
-function updateOrder(action) {
-  var ticker = document.getElementById('ticker').value;
-  var quantity = document.getElementById('quantity').value;
+            $(document).ready(function(){
   
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        document.getElementById('order-div').innerHTML = xhr.responseText;
-      } else {
-        console.log('Error: ' + xhr.status);
+            $("#buy").click(function() {
+                var stockname=$("#stockname").val();
+                var quantity=$("#quantity").val();
+                var buy = $("#buy").val();
+                $.ajax({
+                url:'../home/tradeBack.php',
+                data:{stockname: stockname, quantity: quantity, buy: buy},
+                type:'POST',
+                success:function(data) {
+                    $("#displayorders").html(data);
+                }
+                });
+            });
+        });
+
+        $(document).ready(function(){
+  
+  $("#sell").click(function() {
+      var stockname=$("#stockname").val();
+      var quantity=$("#quantity").val();
+      var sell = $("#sell").val();
+      $.ajax({
+      url:'../home/tradeBack.php',
+      data:{stockname: stockname, quantity: quantity, action: action, sell: sell},
+      type:'POST',
+      success:function(data) {
+          $("#displayorders").html(data);
       }
-    }
-  };
-  
-  xhr.open('POST', 'updateOrder.php', true);
-  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-  xhr.send('ticker=' + ticker + '&quantity=' + quantity + '&action=' + action);
-}
+      });
+  });
+});
 
+		window.onload = function() {
+			// Use setInterval to update the PHP script output every 5 seconds
+			setInterval(function() {
+				// Use Ajax to retrieve the PHP script output
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', '../parallel/updateOrders.php', true);
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState === 4 && xhr.status === 200) {
+						// Update the content of the div with the script output
+						document.getElementById('holdings').innerHTML = xhr.responseText;
+					}
+				};
+				xhr.send();
+			}, 5000);
+		};
       
 </script>
 </body>
