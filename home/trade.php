@@ -3,7 +3,7 @@
     include('../login/config.php');
     
     // session_start();
-    // $id = $_SESSION['user_id'];
+    $uid = $_SESSION['user_id'];
 
     $ticker = '';
 
@@ -25,8 +25,9 @@ table {
 
 th, td {
   text-align: left;
-  padding: 0.5em;
+  padding-bottom: 0.5em;
   border-bottom: 1px solid #ddd;
+  border: 1px solid #ddd;
 }
 
 th {
@@ -65,7 +66,7 @@ header, footer {
   text-align: center;
   padding: 1em;
 }
-.row{
+#tickers{
 
     height:36vh;
     overflow-y:auto;
@@ -75,6 +76,7 @@ header, footer {
 }
 .col-6{
     overflow-y:auto;
+    border: 1px solid black;
 }
 
 th
@@ -86,6 +88,10 @@ th
     /* z-index:100; */
 }
 
+.row{
+  height: 30%;
+}
+
     </style>
 </head>
 <body>
@@ -93,16 +99,18 @@ th
 		<section id="stocks">
        
 			<h2 style="text-align:center;">All Stocks</h2>
-            <div class="row" id="tickers">
+            <div class="row" id="tickers" style="border-bottom: 1px solid black;">
 			<table>
 				<thead>
 					<tr>
-						<th>Symbol</th>
-						<th>Name</th>
-						<th>Price</th>
-						<th>Quantity</th>
-						<th>Buy</th>
-						<th>Sell</th>
+						<th class="sticky-top">Company</th>
+						<th class="sticky-top">Name</th>
+						<th class="sticky-top">Price</th>
+            <th class="sticky-top">   &nbsp  </th>
+            <th class="sticky-top">  &nbsp   </th>
+            <th class="sticky-top"> &nbsp </th>
+            <th class="sticky-top"> &nbsp </th>
+						<th class="sticky-top">Buy</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -110,7 +118,7 @@ th
                     <?php
                             $sql = "SELECT * FROM stocks";
                             $api = "SELECT * FROM apis";
-                            $result1 = $conn->query($sql);
+                            $result1 = mysqli_query($conn, $sql);
 
 
                             if ($result1->num_rows > 0) {
@@ -124,10 +132,18 @@ th
                                     echo $row1["name"]."\t\t";
                                     ?></td>
 						<td id="<?php echo $row1["ticker"];?>"><?php echo $row1['close']; ?></td>
-						<td><input type="number" min="1" name="quantity" id="quantity"></td>
-						<td><button class="buy-button" id="buy" name="action" value="buy">Buy</button></td>
-						<td><button class="sell-button" id="sell" name="action" value="buy">Sell</button></td>
-            <input type="hidden" id="stockname" value="<?php echo $row1['ticker']; ?>" />
+						<td>=====</td>
+            <td>=====</td>
+            <td>===== </td>
+            <td>====</td>
+            <td>
+            <form action="buy.php" method="post">
+              <input type="text" name="quantity" id="quantity">
+              <input type="hidden" name="price" id="price" value="<?php echo $row1['close']; ?>" />
+              <input type="hidden" name="stockname" id="stockname" value="<?php echo $row1['ticker']; ?>" />
+              <input type="submit" class="buy-button" id="buy" name="action" value="Buy" />
+            </form>
+          </td>
 					</tr>
 					<!-- <tr>
 						<td></td>
@@ -150,22 +166,23 @@ th
                                   </section>
 		</section>
         
-            <div class="row border-top" id="trade">
+            <div class="row border-top" id="trade" style="padding-top: -20px;">
                 <div class="col-6 border-right">
-                <section id="orders">
-			<h2>Orders</h2>
+                <!-- <section id="orders"> -->
+			<h4>Orders</h4>
 			<table>
 					<tr>
-          <th>Symbol</th>
-						<th>Side</th>
-						<th>Price</th>
-						<th>Quantity</th>
-						<th>Target</th>
-						<th>Stoploss</th>
+          <th class="sticky-top">Symbol</th>
+						<th class="sticky-top">Side</th>
+						<th class="sticky-top">Price</th>
+						<th class="sticky-top">Quantity</th>
+						<th class="sticky-top">Target</th>
+						<th class="sticky-top">Stoploss</th>
+            <th class="sticky-top"> &nbsp </th>
 					</tr>
 				<tbody id="displayorders">
           <?php
-        $select = "SELECT * FROM orders";
+        $select = "SELECT * FROM orders where id = '$uid'";
     $result = mysqli_query($conn, $select);
 
     if (mysqli_num_rows($result) > 0) {
@@ -182,7 +199,9 @@ th
             <td><?php echo $row['quantity']; ?></td>
             <td><?php echo $row['target']; ?></td>
             <td><?php echo $row['stoploss']; ?></td>
-            <td><button class="btn btn-danger" value="Cancel" name="cancel" id="cancel">Cancel</button></td>
+          <form method="post" action="../home/canord.php">
+            <td><input type="submit" class="btn btn-danger" value="Cancel" name="<?php echo $row['strid']; ?>" id="cancel" /></td>
+        </form>
             <?php }} ?>
         </tr>
 				</tbody>
@@ -192,18 +211,10 @@ th
                 </div>
                 <div class="col-6">
                 <section id="orders">
-			<h2>Holdings</h2>
-			<table id="holdings">
-					<tr>
-						<th>Ticker</th>
-						<th>Quantity</th>
-						<th>Price</th>
-						<th>Profit/Loss</th>
-          </tr>
-				<tbody>
-					<!-- display user's orders here -->
-				</tbody>
-			</table>
+			<h4>Holdings</h4>
+			<div id="holdings">
+					
+        </div>
                                   </div>
                 </div>
             </div>
@@ -232,66 +243,22 @@ th
               });
             }
           });
-        }, 60000);
+        }, 5000);
       });
 
       // Call this function again after 5 seconds to update the stock prices again
-      setTimeout(updateStockPrices, 60000);
+      setTimeout(updateStockPrices, 5000);
     }
 
     // Call the updateStockPrices() function to start updating the stock prices
     updateStockPrices();
-
-            $(document).ready(function(){
-  
-            $("#buy").click(function() {
-                var stockname=$("#stockname").val();
-                var quantity=$("#quantity").val();
-                var buy = $("#buy").val();
-                $.ajax({
-                url:'../home/tradeBack.php',
-                data:{stockname: stockname, quantity: quantity, buy: buy},
-                type:'POST',
-                success:function(data) {
-                    $("#displayorders").html(data);
-                }
-                });
-            });
-        });
-
-        $(document).ready(function(){
-  
-  $("#sell").click(function() {
-      var stockname=$("#stockname").val();
-      var quantity=$("#quantity").val();
-      var sell = $("#sell").val();
-      $.ajax({
-      url:'../home/tradeBack.php',
-      data:{stockname: stockname, quantity: quantity, action: action, sell: sell},
-      type:'POST',
-      success:function(data) {
-          $("#displayorders").html(data);
-      }
-      });
-  });
-});
-
-		window.onload = function() {
-			// Use setInterval to update the PHP script output every 5 seconds
-			setInterval(function() {
-				// Use Ajax to retrieve the PHP script output
-				var xhr = new XMLHttpRequest();
-				xhr.open('GET', '../parallel/updateOrders.php', true);
-				xhr.onreadystatechange = function() {
-					if (xhr.readyState === 4 && xhr.status === 200) {
-						// Update the content of the div with the script output
-						document.getElementById('holdings').innerHTML = xhr.responseText;
-					}
-				};
-				xhr.send();
-			}, 5000);
-		};
       
+    $(document).ready(function() {
+        setInterval(function() {
+            $('#holdings').load('../parallel/update_holdings.php');
+        }, 500); // Refresh every 5 seconds
+    });
+
 </script>
 </body>
 </html>

@@ -9,7 +9,7 @@ $quantity = $_POST['quantity'];
 $command = "php ../parallel/updateOrders.php " . escapeshellarg($stockname) . " " . escapeshellarg($quantity);
 $output = exec($command);
 
-$sql = "INSERT INTO orders (strid, id, ticker, side, price, quantity, target, stoploss) VALUES ('$strid', '$id', '$stockname', 'buy', 0, '$quantity', 0, 0)";
+$sql = "INSERT INTO orders (strid, id, ticker, side, price, quantity, target, stoploss) VALUES ('$strid', '$id', '$stockname', 'sell', 0, '$quantity', 0, 0)";
 if (mysqli_query($conn, $sql)) {
     $select = "SELECT * FROM orders";
     $result = mysqli_query($conn, $select);
@@ -22,30 +22,32 @@ if (mysqli_query($conn, $sql)) {
             // Execute the command and capture the output
             ?>
             <tr id="orderdetails">
-                <input type="hidden" id="todel" value="<?php echo $row['strid']; ?>" name="todel">
+            <input type="hidden" id="todel" value="<?php echo $row['strid']; ?>" name="todel">
             <td><?php echo $row['ticker']; ?></td>
             <td><?php echo $row['side']; ?></td>
             <td><?php echo $row['price']; ?></td>
             <td><?php echo $row['quantity']; ?></td>
             <td><?php echo $row['target']; ?></td>
             <td><?php echo $row['stoploss']; ?></td>
-            <td><button class="btn btn-danger" value="<?php echo $row['strid']; ?>" name="cancel" id="<?php echo $row['strid']; ?>">Cancel</button></td>
+            <form method="post" action="canord.php">
+            <td><input type="submit" class="btn btn-danger" value="Cancel" name="<?php echo $row[strid]; ?>" /></td>
+        </form>
         </tr>
         <script>
-            $(document).ready(function(){
+            // $(document).ready(function(){
   
-            $("#<?php echo $row['strid']; ?>").click(function() {
-                var todel=$("#todel").val();
-                $.ajax({
-                url:'../home/canord.php',
-                data:{todel: todel},
-                type:'POST',
-                success:function(data) {
-                    $("#displayorders").html(data);
-                }
-                });
-            });
-            });
+            // $("#<?php echo $row['strid']; ?>").click(function() {
+            //     var todel=$("#todel").val();
+            //     $.ajax({
+            //     url:'../home/canord.php',
+            //     data:{todel: todel},
+            //     type:'POST',
+            //     success:function(data) {
+            //         $("#displayorders").html(data);
+            //     }
+            //     });
+            // });
+            // });
         </script>
             <?php
         }

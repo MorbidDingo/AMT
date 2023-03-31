@@ -150,7 +150,8 @@
   $strategies = $conn->query($fetch);
 ?>
   
-    <div id="app" style="margin-top: -3.4%; margin-left: 6rem; width: 95%;">
+    <div id="app" style="margin-top: -3.4%; margin-left: 6rem; width: 95%; overflow-y:auto;">
+    <div style="text-align: center; background-color: white; height: 5%;"><h2>MARKETS</h2></div>
   <div class="app-container">
   
   <?php
