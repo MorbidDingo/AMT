@@ -164,7 +164,27 @@ th
 						<th>Stoploss</th>
 					</tr>
 				<tbody id="displayorders">
-					<!-- display user's orders here -->
+          <?php
+        $select = "SELECT * FROM orders";
+    $result = mysqli_query($conn, $select);
+
+    if (mysqli_num_rows($result) > 0) {
+        // output data of each row
+        while ($row = mysqli_fetch_assoc($result)) {
+            
+
+            // Execute the command and capture the output
+            ?>
+            <tr id="orderdetails">
+            <td><?php echo $row['ticker']; ?></td>
+            <td><?php echo $row['side']; ?></td>
+            <td><?php echo $row['price']; ?></td>
+            <td><?php echo $row['quantity']; ?></td>
+            <td><?php echo $row['target']; ?></td>
+            <td><?php echo $row['stoploss']; ?></td>
+            <td><button class="btn btn-danger" value="Cancel" name="cancel" id="cancel">Cancel</button></td>
+            <?php }} ?>
+        </tr>
 				</tbody>
 			</table>
 		</section>

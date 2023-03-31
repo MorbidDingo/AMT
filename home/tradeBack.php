@@ -1,7 +1,6 @@
 <?php
 include ('../login/config.php');
 session_start();
-
 $strid = rand(rand(), rand());
 $id = $_SESSION['user_id'];
 set_time_limit(0);
