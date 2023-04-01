@@ -212,7 +212,7 @@ th
                 <div class="col-6">
                 <section id="orders">
 			<h4>Holdings</h4>
-			<div id="holdings">
+			<div id="holdings" style="overflow-y: auto;">
 					
         </div>
                                   </div>

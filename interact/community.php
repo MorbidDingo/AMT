@@ -10,11 +10,6 @@ while( $record = mysqli_fetch_assoc($resultset) ) {
 
 
 
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,7 +99,7 @@ body{
                   </div>
                 </div>
               </div>
-              <div class="card mt-3">
+              <div class="card mt-3" style="overflow-y: auto; height:100px; border-radius: 10px;">
                <?php
                   $view = "SELECT time,view from views where uid='".$record['id']."'";
                   $viewset = mysqli_query($conn, $view) or die("database error:". mysqli_error($conn));			
@@ -119,29 +114,35 @@ body{
             </div>
             <div class="col-md-8">
               <div class="card mb-3">
-                <div class="card-body">
+              <div class="card-body">
+              <?php
+              $usid = $record['id'];
+              $privacy = 1;
+                $strat = "SELECT * from strategies where uid = '$usid' and privacy = '$privacy'";
+                $stratresult = mysqli_query($conn, $strat);
+
+                if (mysqli_num_rows($stratresult) > 0) {
+                  // output data of each row
+                  while($s = mysqli_fetch_assoc($stratresult)) {
+              ?>
                     <div class="card text-white bg-dark mb-3" style="max-width: 50rem;">
-                     <div class="card-header">Header</div>
+                     <div class="card-header"><?php echo $s['name']; ?></div>
                      <div class="card-body">
-                        <h5 class="card-title">Dark card title</h5>
-                        <p class="card-text">Soooooooo</p>
+                        <!-- <h5 class="card-title"></h5> -->
+                        <p class="card-text" style="overflow-x: auto;"><?php echo $s['descr']; ?></p>
                     </div>
 
-                </div>
                 
+                <?php
+                }
+              }
+              else
+              {
+                echo "No strategies created yet.";
+              }
+                ?>
                 </div>
-
-                <div class="card mb-0">
-                <div class="card-body">
-                    <div class="card text-white bg-dark mb-3" style="max-width: 50rem;">
-                     <div class="card-header">Header</div>
-                     <div class="card-body">
-                        <h5 class="card-title">Dark card title</h5>
-                        <p class="card-text">Someeeeee.</p>
-                    </div>
-
-                </div>
-                
+                </div>               
                 
                 </div>
               </div>

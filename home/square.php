@@ -7,6 +7,7 @@
         $ticker = $_POST['ticker'];
         $result = mysqli_query($conn, "DELETE FROM holdings WHERE id = '$id' AND ticker = '$ticker'");
         $bal = $_POST['bal'];
+        $pl = $_POST['pl'];
 
         // Check if the query was successful
         if ($result) {

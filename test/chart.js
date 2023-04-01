@@ -64,7 +64,7 @@ function plotChart(timestamps, openValues, highValues, lowValues, closeValues) {
   
     const chart = LightweightCharts.createChart(chartElement, {
       width: chartElement.clientWidth,
-      height: 400,
+      height: 500,
     });
   
     const candlestickSeries = chart.addCandlestickSeries();

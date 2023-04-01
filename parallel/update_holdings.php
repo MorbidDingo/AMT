@@ -36,6 +36,7 @@ if (mysqli_num_rows($holdresult) > 0) {
             // output data of each row
             while ($rec1 = mysqli_fetch_assoc($stockresult)) {
                 $profit_loss = ($rec1['close'] - $rec['avg_price']) * $rec['quantity'];
+                $total = $rec1['close']*$rec['quantity'];
                 $color = $profit_loss < 0 ? 'text-danger' : 'text-success';
 ?>
 
@@ -47,7 +48,8 @@ if (mysqli_num_rows($holdresult) > 0) {
                     <td>
                         <form action="square.php" method="post">
                             <input type="hidden" name="ticker" value="<?php echo $rec['ticker']; ?>" />
-                            <input type="hidden" name="bal" value="<?php echo $profit_loss; ?>" />
+                            <input type="hidden" name="pl" value="<?php echo $profit_loss; ?>" />
+                            <input type="hidden" name="bal" value="<?php echo $total; ?>" />
                             <input type="submit" class="btn btn-danger" value="Sell" name="square" />
                         </form>
                     </td>

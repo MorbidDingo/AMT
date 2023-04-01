@@ -3,7 +3,7 @@
     if($_SESSION['user_name']!=NULL)
     {
         include('header.php');
-        include('sidebar.html');
+        include('sidebar.php');
         // include('content.php');
         // include('footer.php');
     }

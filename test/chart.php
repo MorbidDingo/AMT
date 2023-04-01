@@ -1,10 +1,11 @@
 <?php
   include('../home/head.php');
+  include('../login/config.php');
 ?>
     <style>
         #chart
         {
-            height: 100%;
+            height: 95%;
             width: 100%;
             
         }
@@ -12,11 +13,14 @@
 
   </head>
   <body>
-  <div class="card">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card text-bg-dark">
       <div class="card-title">
       <label for="symbol-input">Symbol:</label>
-      <input type="text" id="symbol-input" />
-      <button id="search-button" class="btn btn-success">Search</button>
+      <input type="text" id="symbol-input" name="stock"/>
+      <button id="search-button" type="submit" class="btn btn-success" name="symbol">Search</button>
       </div>
 
       <div class="card-subtitle">
@@ -31,6 +35,35 @@
       <div id="chart"></div>
     </div>
     </div>
+      </div>
+    </div>   
+    <div class="row">
+      <div class="col-12">
+      <div class="card text-bg-dark" id="Views">
+      </div>
+      </div>
+    </div>
+  </div>
+ 
+<!-- Your HTML code for the search form here -->
+
     <script src="../test/chart.js"></script>
+
+    <script>
+      $(document).ready(function(){
+  
+  $("#search-button").click(function() {
+      var stock=$("#symbol-input").val();
+      $.ajax({
+      url:'../test/stock_views.php',
+      data:{stock: stock},
+      type:'POST',
+      success:function(data) {
+          $("#Views").html(data);
+      }
+      });
+  });
+});
+    </script>
   </body>
 
